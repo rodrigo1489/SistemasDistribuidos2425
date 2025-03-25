@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wavy", "Wavy\Wavy.csproj", "{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agregador", "Agregador\Agregador.csproj", "{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servidor", "Servidor\Servidor.csproj", "{6BB9AA1B-D94B-4567-8E2E-926DED0E8963}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BB9AA1B-D94B-4567-8E2E-926DED0E8963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BB9AA1B-D94B-4567-8E2E-926DED0E8963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BB9AA1B-D94B-4567-8E2E-926DED0E8963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BB9AA1B-D94B-4567-8E2E-926DED0E8963}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

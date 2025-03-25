@@ -1,0 +1,73 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\rodri\\source\\repos\\rodrigo1489\\SistemasDistribuidos2425\\MonitorizacaoOceanica\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6BB9AA1B-D94B-4567-8E2E-926DED0E8963}|Servidor\\Servidor.csproj|c:\\users\\rodri\\source\\repos\\rodrigo1489\\sistemasdistribuidos2425\\monitorizacaooceanica\\servidor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6BB9AA1B-D94B-4567-8E2E-926DED0E8963}|Servidor\\Servidor.csproj|solutionrelative:servidor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}|Agregador\\Agregador.csproj|c:\\users\\rodri\\source\\repos\\rodrigo1489\\sistemasdistribuidos2425\\monitorizacaooceanica\\agregador\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}|Agregador\\Agregador.csproj|solutionrelative:agregador\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}|Wavy\\Wavy.csproj|c:\\users\\rodri\\source\\repos\\rodrigo1489\\sistemasdistribuidos2425\\monitorizacaooceanica\\wavy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}|Wavy\\Wavy.csproj|solutionrelative:wavy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\rodrigo1489\\SistemasDistribuidos2425\\MonitorizacaoOceanica\\Servidor\\Program.cs",
+              "RelativeDocumentMoniker": "Servidor\\Program.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\rodrigo1489\\SistemasDistribuidos2425\\MonitorizacaoOceanica\\Servidor\\Program.cs",
+              "RelativeToolTip": "Servidor\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T15:50:57.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\rodrigo1489\\SistemasDistribuidos2425\\MonitorizacaoOceanica\\Agregador\\Program.cs",
+              "RelativeDocumentMoniker": "Agregador\\Program.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\rodrigo1489\\SistemasDistribuidos2425\\MonitorizacaoOceanica\\Agregador\\Program.cs",
+              "RelativeToolTip": "Agregador\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T15:50:37.396Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\rodrigo1489\\SistemasDistribuidos2425\\MonitorizacaoOceanica\\Wavy\\Program.cs",
+              "RelativeDocumentMoniker": "Wavy\\Program.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\rodrigo1489\\SistemasDistribuidos2425\\MonitorizacaoOceanica\\Wavy\\Program.cs",
+              "RelativeToolTip": "Wavy\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T15:50:07.01Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
