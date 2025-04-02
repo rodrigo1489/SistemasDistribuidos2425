@@ -1,0 +1,15 @@
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\bin\Debug\net8.0\Wavy_Basica.exe
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\bin\Debug\net8.0\Wavy_Basica.deps.json
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\bin\Debug\net8.0\Wavy_Basica.runtimeconfig.json
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\bin\Debug\net8.0\Wavy_Basica.dll
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\bin\Debug\net8.0\Wavy_Basica.pdb
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\obj\Debug\net8.0\Wavy_Basica.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\obj\Debug\net8.0\Wavy_Basica.AssemblyInfoInputs.cache
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\obj\Debug\net8.0\Wavy_Basica.AssemblyInfo.cs
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\obj\Debug\net8.0\Wavy_Basica.csproj.CoreCompileInputs.cache
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\obj\Debug\net8.0\Wavy_Basica.sourcelink.json
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\obj\Debug\net8.0\Wavy_Basica.dll
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\obj\Debug\net8.0\refint\Wavy_Basica.dll
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\obj\Debug\net8.0\Wavy_Basica.pdb
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\obj\Debug\net8.0\Wavy_Basica.genruntimeconfig.cache
+C:\Users\rodri\source\repos\SistemasDistribuidos2425\MonitorizacaoOceanica\Wavy\obj\Debug\net8.0\ref\Wavy_Basica.dll
