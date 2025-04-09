@@ -1,0 +1,15 @@
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\bin\Debug\net8.0\Wavy.metereologica.exe
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\bin\Debug\net8.0\Wavy.metereologica.deps.json
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\bin\Debug\net8.0\Wavy.metereologica.runtimeconfig.json
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\bin\Debug\net8.0\Wavy.metereologica.dll
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\bin\Debug\net8.0\Wavy.metereologica.pdb
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\obj\Debug\net8.0\Wavy.metereologica.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\obj\Debug\net8.0\Wavy.metereologica.AssemblyInfoInputs.cache
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\obj\Debug\net8.0\Wavy.metereologica.AssemblyInfo.cs
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\obj\Debug\net8.0\Wavy.metereologica.csproj.CoreCompileInputs.cache
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\obj\Debug\net8.0\Wavy.metereologica.sourcelink.json
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\obj\Debug\net8.0\Wavy.metereologica.dll
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\obj\Debug\net8.0\refint\Wavy.metereologica.dll
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\obj\Debug\net8.0\Wavy.metereologica.pdb
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\obj\Debug\net8.0\Wavy.metereologica.genruntimeconfig.cache
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.metereologica\obj\Debug\net8.0\ref\Wavy.metereologica.dll
