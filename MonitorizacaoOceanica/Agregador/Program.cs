@@ -32,10 +32,19 @@ class Agregador
 
     static Mutex instanceMutex;
 
+    // Dicionário para armazenar Mutexes por caminho de ficheiro
+    static Dictionary<string, Mutex> ficheiroMutexes = new Dictionary<string, Mutex>();
+    // Para proteger o dicionário acima
+    static object ficheiroMutexesLock = new object();
+
 
 
     static void Main()
     {
+        // Gera ID e porta livres
+        (agregadorId, porta) = GerarAgregadorDisponivel();
+        Console.WriteLine($"[INFO] Este agregador vai correr como {agregadorId} na porta {porta}.");
+
         string nomeUnico = $"mutex_instancia_{agregadorId}";
         bool created;
 
@@ -55,9 +64,6 @@ class Agregador
             Environment.Exit(0);
         };
 
-        // Gera ID e porta livres
-        (agregadorId, porta) = GerarAgregadorDisponivel();
-        Console.WriteLine($"[INFO] Este agregador vai correr como {agregadorId} na porta {porta}.");
 
         // Adiciona este Agregador no ficheiro global
         File.AppendAllText(configFile, $"{agregadorId}|{porta}\n");
@@ -123,7 +129,17 @@ class Agregador
                     if (!string.IsNullOrEmpty(path))
                     {
                         // Acrescenta esta linha ao ficheiro do tipo
-                        File.AppendAllText(path, linha + Environment.NewLine);
+                        Mutex fileMutex = ObterMutexParaFicheiro(path);
+                        fileMutex.WaitOne(); // bloqueia até obter acesso exclusivo
+                        try
+                        {
+                            File.AppendAllText(path, linha + Environment.NewLine);
+                        }
+                        finally
+                        {
+                            fileMutex.ReleaseMutex(); // libera
+                        }
+
                         string wavyId = partes[1];
                         AtualizarEstadoNoFicheiro(wavyId, "operação");
                     }
@@ -177,27 +193,34 @@ class Agregador
 
     static void EnviarDadosParaServidor()
     {
-        // Coloca todos os caminhos fixos num array
-        // Se tivesses mais tipos, adiciona aqui
+        // Lista de tipos que podem existir
         string[] tipos = { "Temperatura", "Pressão", "Humidade", "Velocidade do Vento" };
+        // Obtem o caminho de cada ficheiro deste agregador e filtra só os existentes
         string[] ficheiros = tipos
             .Select(tipo => CaminhoFicheiro(tipo))
             .Where(File.Exists)
             .ToArray();
 
-
         List<string> todasAsLinhas = new List<string>();
 
-        // Lê cada ficheiro, se existir
+        // 1) Ler cada ficheiro com mutex
         foreach (string ficheiro in ficheiros)
         {
-            if (File.Exists(ficheiro))
+            // Obter/ criar Mutex para este ficheiro
+            Mutex fileMutex = ObterMutexParaFicheiro(ficheiro);
+            fileMutex.WaitOne();
+            try
             {
-                var linhas = File.ReadAllLines(ficheiro).ToList();
-                if (linhas.Count > 0)
+                // Lê as linhas se existir
+                var linhas = File.ReadAllLines(ficheiro);
+                if (linhas.Length > 0)
                 {
                     todasAsLinhas.AddRange(linhas);
                 }
+            }
+            finally
+            {
+                fileMutex.ReleaseMutex(); // libertar
             }
         }
 
@@ -207,24 +230,25 @@ class Agregador
             return;
         }
 
-        // Filtra e agrupa para calcular volume e média
+        // 2) Processar e agrupar para calcular volume e média
         var parsed = todasAsLinhas
             .Select(l => l.Split('|', StringSplitOptions.TrimEntries))
             .Where(p => p.Length >= 6 && p[0] == "DADOS")
             .ToList();
 
-        // Agrupa por p[3] => TIPO
+        // Agrupa por p[3] => TIPO (Temperatura, Pressão, etc.)
         var agrupados = parsed.GroupBy(p => p[3]);
 
-        // Pacote final = linhas brutas + linhas de média
+        // Pacote final: linhas brutas + linhas de média
         List<string> pacoteLinhas = new List<string>();
-        // Adicionamos brutas
+
+        // Adicionamos as linhas brutas
         foreach (var parts in parsed)
         {
             pacoteLinhas.Add(string.Join(" | ", parts));
         }
 
-        // Para cada grupo, calculamos media
+        // Para cada grupo, calculamos média
         foreach (var grupo in agrupados)
         {
             string tipo = grupo.Key;
@@ -234,14 +258,15 @@ class Agregador
             int volume = valores.Count;
             string ts = DateTime.UtcNow.ToString("o");
 
-            // "DADOS | AGREGADOR_01 | SERVIDOR_01 | tipo | media | volume | media | timestamp"
+            // Exemplo:
+            // "DADOS | AGREGADOR_ID | SERVIDOR_01 | tipo | media | volume | media | timestamp"
             string linhaMedia = $"DADOS | {agregadorId} | SERVIDOR_01 | {tipo} | {media:F1} | {volume} | media | {ts}";
             pacoteLinhas.Add(linhaMedia);
         }
 
+        // 3) Montar a string final e enviar ao Servidor
         string pacoteFinal = string.Join("\n", pacoteLinhas);
 
-        // Enviar ao Servidor
         string resposta;
         try
         {
@@ -263,14 +288,21 @@ class Agregador
             return;
         }
 
-        // Se confirmou, apagar os ficheiros
+        // 4) Se confirmou, apagar (esvaziar) os ficheiros com mutex
         if (resposta.StartsWith("CONFIRMADO"))
         {
             foreach (string ficheiro in ficheiros)
             {
-                if (File.Exists(ficheiro))
+                Mutex fileMutex = ObterMutexParaFicheiro(ficheiro);
+                fileMutex.WaitOne();
+                try
                 {
-                    File.WriteAllText(ficheiro, ""); // esvazia
+                    // Esvaziar o ficheiro
+                    File.WriteAllText(ficheiro, "");
+                }
+                finally
+                {
+                    fileMutex.ReleaseMutex();
                 }
             }
             Console.WriteLine($"[{agregadorId}] Dados confirmados. Ficheiros de dados esvaziados.");
@@ -281,8 +313,9 @@ class Agregador
         }
     }
 
+
     /// Thread que envia automaticamente à meia-noite.
-   
+
     static void EnviarParaServidorDiariamente()
     {
         while (true)
@@ -386,9 +419,8 @@ class Agregador
             if (campos[0] == wavyId)
             {
                 campos[1] = novoEstado;
-                if (!string.IsNullOrWhiteSpace(dataTypes))
+                if (!string.IsNullOrWhiteSpace(daetaTypes))
                     campos[2] = dataTypes;
-                campos[3] = DateTime.UtcNow.ToString("o");
                 linhas[i] = string.Join(":", campos);
                 found = true;
                 break;
@@ -396,7 +428,7 @@ class Agregador
         }
         if (!found)
         {
-            string line = $"{wavyId}:{novoEstado}:{dataTypes}:{DateTime.UtcNow:o}";
+            string line = $"{wavyId}:{novoEstado}:{dataTypes}";
             linhas.Add(line);
         }
         File.WriteAllLines(wavysEstadoFile, linhas);
@@ -441,6 +473,22 @@ class Agregador
                     Console.WriteLine($"[ERRO] Ao apagar ficheiro {path}: {ex.Message}");
                 }
             }
+        }
+    }
+    /// Retorna (ou cria) um Mutex associado a um caminho de ficheiro.
+    /// Garante exclusão mútua no acesso a esse ficheiro.
+    static Mutex ObterMutexParaFicheiro(string filePath)
+    {
+        lock (ficheiroMutexesLock)
+        {
+            // Se ainda não existe, cria um Mutex nomeado
+            if (!ficheiroMutexes.ContainsKey(filePath))
+            {
+                // Nome do mutex pode ser algo sem caracteres especiais
+                string nomeMutex = "mutex_" + filePath.Replace("\\", "_").Replace(":", "");
+                ficheiroMutexes[filePath] = new Mutex(false, nomeMutex);
+            }
+            return ficheiroMutexes[filePath];
         }
     }
 
