@@ -10,7 +10,7 @@ using System.Threading;
 class Agregador
 {
     // Identificador e porta do Agregador
-    static string agregadorId;
+    static string agregadorId = string.Empty;
     static int porta;
 
     // Ficheiro global de config (ID|PORTA) para saber que Agregadores existem
@@ -19,7 +19,7 @@ class Agregador
     // Estado das WAVYs - "WAVY_01:operação::2025-04-20T10:00:00Z"
     static string wavysEstadoFile = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\estado_wavys.txt";
 
-    static TcpListener listener;
+    static TcpListener? listener;
 
     // Base de onde os ficheiros são criados
     static string basePath = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\agregador_data\";
@@ -30,7 +30,7 @@ class Agregador
         return Path.Combine(basePath, $"{tipo}_{agregadorId}.txt");
     }
 
-    static Mutex instanceMutex;
+    static Mutex instanceMutex = null!;
 
     // Dicionário para armazenar Mutexes por caminho de ficheiro
     static Dictionary<string, Mutex> ficheiroMutexes = new Dictionary<string, Mutex>();
@@ -141,7 +141,7 @@ class Agregador
                         }
 
                         string wavyId = partes[1];
-                        AtualizarEstadoNoFicheiro(wavyId, "operação");
+                        AtualizarEstadoNoFicheiro(wavyId, "operação", agregadorId);
                     }
                     else
                     {
@@ -169,12 +169,44 @@ class Agregador
             {
                 string wavyId = partes[1];
                 string novoEstado = partes[3];
-                AtualizarEstadoNoFicheiro(wavyId, novoEstado);
+                AtualizarEstadoNoFicheiro(wavyId, novoEstado, agregadorId);
                 resposta = $"CONFIRMADO | {agregadorId} | {wavyId}";
             }
             else
             {
                 resposta = $"ERRO | {agregadorId} | FORMATO_INCOMPLETO";
+            }
+        }
+        else if (message.StartsWith("COMANDO"))
+        {
+            // parted[3] => "enviar" ou "sair"
+            string[] partes = message.Split('|', StringSplitOptions.TrimEntries);
+            if (partes.Length >= 4)
+            {
+                string acao = partes[3];
+                if (acao == "enviar")
+                {
+                    EnviarDadosParaServidor();
+                    resposta = $"CONFIRMADO | {agregadorId} | ENVIAR_OK";
+                }
+                else if (acao == "sair")
+                {
+                    MarcarWavysAssociadasComoDesligadas();
+                    resposta = $"CONFIRMADO | {agregadorId} | SAIR_OK";
+                    listener.Stop();
+                    RemoverRegistoAgregador();
+                    EnviarAvisoDesligarAoServidor();
+                    ApagarFicheirosDoAgregador();
+                    // Opcional: Environment.Exit(0);
+                }
+                else
+                {
+                    resposta = $"ERRO | {agregadorId} | COMANDO DESCONHECIDO";
+                }
+            }
+            else
+            {
+                resposta = $"ERRO | {agregadorId} | COMANDO FORMATO INVÁLIDO";
             }
         }
         else
@@ -341,6 +373,7 @@ class Agregador
             }
             else if (comando?.ToLower() == "sair")
             {
+                MarcarWavysAssociadasComoDesligadas();
                 listener.Stop();
                 RemoverRegistoAgregador();
                 EnviarAvisoDesligarAoServidor();
@@ -406,7 +439,8 @@ class Agregador
 
     /// Atualiza o estado de uma WAVY no ficheiro "wavys_agregador.txt".
     /// Linha ex: "WAVY_01:manutencao::2025-04-20T10:20:00Z"
-    static void AtualizarEstadoNoFicheiro(string wavyId, string novoEstado, string dataTypes = "")
+    static void AtualizarEstadoNoFicheiro(string wavyId, string novoEstado, string agregatorId)
+
     {
         if (!File.Exists(wavysEstadoFile))
             File.WriteAllText(wavysEstadoFile, "");
@@ -419,8 +453,7 @@ class Agregador
             if (campos[0] == wavyId)
             {
                 campos[1] = novoEstado;
-                if (!string.IsNullOrWhiteSpace(daetaTypes))
-                    campos[2] = dataTypes;
+                campos[2] = agregadorId;
                 linhas[i] = string.Join(":", campos);
                 found = true;
                 break;
@@ -428,7 +461,7 @@ class Agregador
         }
         if (!found)
         {
-            string line = $"{wavyId}:{novoEstado}:{dataTypes}";
+            string line = $"{wavyId}:{novoEstado}:{agregadorId}";
             linhas.Add(line);
         }
         File.WriteAllLines(wavysEstadoFile, linhas);
@@ -492,4 +525,35 @@ class Agregador
         }
     }
 
+    static void MarcarWavysAssociadasComoDesligadas()
+    {
+        // Ficheiro com linhas: "WAVY_01:operação:AGREGADOR_01"
+        string path = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\estado_wavys.txt";
+        if (!File.Exists(path))
+            return;
+
+        var linhas = File.ReadAllLines(path).ToList();
+        for (int i = 0; i < linhas.Count; i++)
+        {
+            // parted[0] = "WAVY_01", parted[1] = "operação", parted[2] = "AGREGADOR_01"
+            var partes = linhas[i].Split(':');
+            if (partes.Length >= 3)
+            {
+                // Se parted[2] for o ID do agregador
+                if (partes[2] == agregadorId)
+                {
+                    // Marca parted[1] => "Desligada" (pois parted[1] é o estado)
+                    partes[1] = "Desligada";
+
+                    // Se houver parted[3] como timestamp (opcional), podes atualizar:
+                    // if (partes.Length >= 4)
+                    //     partes[3] = DateTime.UtcNow.ToString("o");
+
+                    // Reconstrói a linha
+                    linhas[i] = string.Join(":", partes);
+                }
+            }
+        }
+        File.WriteAllLines(path, linhas);
+    }
 }
