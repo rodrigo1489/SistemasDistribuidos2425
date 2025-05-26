@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- O teu DbContext e entidades -->
+		<ProjectReference Include="..\Servidor 2.0\Servidor20.csproj" />
+
+		<!-- Serviços gRPC -->
+		<Protobuf Include="..\preprocess.proto" GrpcServices="Client" />
+		<Protobuf Include="..\analyze.proto" GrpcServices="Client" />
+		<PackageReference Include="Grpc.Net.ClientFactory" Version="2.71.0" />
+
+		<!-- EF Core provider para SQL Server -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
+
+		<!-- Swagger / OpenAPI -->
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+
+		<!-- gRPC client support -->
+		<PackageReference Include="Google.Protobuf" Version="3.31.0" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.72.0">
+			<PrivateAssets>All</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+
+</Project>

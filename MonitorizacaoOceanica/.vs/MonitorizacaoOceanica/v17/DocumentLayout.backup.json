@@ -3,55 +3,139 @@
   "WorkspaceRootPath": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor 2.0.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor 2.0\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor 2.0.csproj|solutionrelative:servidor 2.0\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor20.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor 2.0\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor20.csproj|solutionrelative:servidor 2.0\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{36AC0019-029A-4041-957F-018CB8310D18}|AnalysisService\\AnalysisService.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\analysisservice\\services\\analysisserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36AC0019-029A-4041-957F-018CB8310D18}|AnalysisService\\AnalysisService.csproj|solutionrelative:analysisservice\\services\\analysisserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{36AC0019-029A-4041-957F-018CB8310D18}|AnalysisService\\AnalysisService.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\analysisservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36AC0019-029A-4041-957F-018CB8310D18}|AnalysisService\\AnalysisService.csproj|solutionrelative:analysisservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor20.ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|solutionrelative:servidor20.ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3659C3B-FD44-4A78-99C7-45E6ABB07650}|PreprocessingService\\PreprocessingService.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\preprocessingservice\\preprocessingservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C3659C3B-FD44-4A78-99C7-45E6ABB07650}|PreprocessingService\\PreprocessingService.csproj|solutionrelative:preprocessingservice\\preprocessingservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}|Agregador\\Agregador.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\agregador\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}|Agregador\\Agregador.csproj|solutionrelative:agregador\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}|Wavy\\Wavy.basica.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\wavy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}|Wavy\\Wavy.basica.csproj|solutionrelative:wavy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1935F064-00BA-443A-BD41-9E534FF81418}|Gestor\\Gestor.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\gestor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1935F064-00BA-443A-BD41-9E534FF81418}|Gestor\\Gestor.csproj|solutionrelative:gestor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1935F064-00BA-443A-BD41-9E534FF81418}|Gestor\\Gestor.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\gestor\\gestor.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{1935F064-00BA-443A-BD41-9E534FF81418}|Gestor\\Gestor.csproj|solutionrelative:gestor\\gestor.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor20.ui\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|solutionrelative:servidor20.ui\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E9C2836F-A9A5-47D6-AF94-311C58F5A452}|Wavy.pro\\Wavy.pro.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\wavy.pro\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E9C2836F-A9A5-47D6-AF94-311C58F5A452}|Wavy.pro\\Wavy.pro.csproj|solutionrelative:wavy.pro\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{36AC0019-029A-4041-957F-018CB8310D18}|AnalysisService\\AnalysisService.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\analysisservice\\analysisservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{36AC0019-029A-4041-957F-018CB8310D18}|AnalysisService\\AnalysisService.csproj|solutionrelative:analysisservice\\analysisservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3659C3B-FD44-4A78-99C7-45E6ABB07650}|PreprocessingService\\PreprocessingService.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\preprocessingservice\\services\\preprocessingserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3659C3B-FD44-4A78-99C7-45E6ABB07650}|PreprocessingService\\PreprocessingService.csproj|solutionrelative:preprocessingservice\\services\\preprocessingserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4A92590B-4C5B-49A2-A761-592C57A8DCE2}|Wavy.metereologica\\Wavy.metereologica.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\wavy.metereologica\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4A92590B-4C5B-49A2-A761-592C57A8DCE2}|Wavy.metereologica\\Wavy.metereologica.csproj|solutionrelative:wavy.metereologica\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1935F064-00BA-443A-BD41-9E534FF81418}|Gestor\\Gestor.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\gestor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1935F064-00BA-443A-BD41-9E534FF81418}|Gestor\\Gestor.csproj|solutionrelative:gestor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3659C3B-FD44-4A78-99C7-45E6ABB07650}|PreprocessingService\\PreprocessingService.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\preprocessingservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3659C3B-FD44-4A78-99C7-45E6ABB07650}|PreprocessingService\\PreprocessingService.csproj|solutionrelative:preprocessingservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}|Agregador\\Agregador.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\agregador\\agregador.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}|Agregador\\Agregador.csproj|solutionrelative:agregador\\agregador.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor20.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor 2.0\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor20.csproj|solutionrelative:servidor 2.0\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor 2.0.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor 2.0\\servidor 2.0.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor 2.0.csproj|solutionrelative:servidor 2.0\\servidor 2.0.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor20.ui\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|solutionrelative:servidor20.ui\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor20.ui\\wwwroot\\js\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|solutionrelative:servidor20.ui\\wwwroot\\js\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E9C2836F-A9A5-47D6-AF94-311C58F5A452}|Wavy.pro\\Wavy.pro.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\wavy.pro\\wavy.pro.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{E9C2836F-A9A5-47D6-AF94-311C58F5A452}|Wavy.pro\\Wavy.pro.csproj|solutionrelative:wavy.pro\\wavy.pro.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor20.ui\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|solutionrelative:servidor20.ui\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1935F064-00BA-443A-BD41-9E534FF81418}|Gestor\\Gestor.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\gestor\\gestor.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{1935F064-00BA-443A-BD41-9E534FF81418}|Gestor\\Gestor.csproj|solutionrelative:gestor\\gestor.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor20.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor 2.0\\models\\registo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor20.csproj|solutionrelative:servidor 2.0\\models\\registo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor20.ui\\servidor20.ui.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3C60A065-4BE6-4A32-B8C3-00A2C59FE0BB}|Servidor20.UI\\Servidor20.UI.csproj|solutionrelative:servidor20.ui\\servidor20.ui.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor20.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor 2.0\\data\\monitoracaocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor20.csproj|solutionrelative:servidor 2.0\\data\\monitoracaocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}|Wavy\\Wavy.basica.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\wavy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}|Wavy\\Wavy.basica.csproj|solutionrelative:wavy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3659C3B-FD44-4A78-99C7-45E6ABB07650}|PreprocessingService\\PreprocessingService.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\preprocessingservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C3659C3B-FD44-4A78-99C7-45E6ABB07650}|PreprocessingService\\PreprocessingService.csproj|solutionrelative:preprocessingservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor20.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\servidor 2.0\\servidor20.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{95899FE2-766A-4DC2-AE1A-EA26EB48508C}|Servidor 2.0\\Servidor20.csproj|solutionrelative:servidor 2.0\\servidor20.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9C2836F-A9A5-47D6-AF94-311C58F5A452}|Wavy.pro\\Wavy.pro.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\wavy.pro\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9C2836F-A9A5-47D6-AF94-311C58F5A452}|Wavy.pro\\Wavy.pro.csproj|solutionrelative:wavy.pro\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A92590B-4C5B-49A2-A761-592C57A8DCE2}|Wavy.metereologica\\Wavy.metereologica.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\wavy.metereologica\\wavy.metereologica.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4A92590B-4C5B-49A2-A761-592C57A8DCE2}|Wavy.metereologica\\Wavy.metereologica.csproj|solutionrelative:wavy.metereologica\\wavy.metereologica.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}|Agregador\\Agregador.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\agregador\\agregador.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{BE5083C7-4CB4-45D7-B1D0-228F95FD9A09}|Agregador\\Agregador.csproj|solutionrelative:agregador\\agregador.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{36AC0019-029A-4041-957F-018CB8310D18}|AnalysisService\\AnalysisService.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\analysisservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{36AC0019-029A-4041-957F-018CB8310D18}|AnalysisService\\AnalysisService.csproj|solutionrelative:analysisservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA0F7F5C-EC98-4798-BBEA-94E6BB81AE7B}|Protos{BA0F7F5C-EC98-4798-BBEA-94E6BB81AE7B}|C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\analyze.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{BA0F7F5C-EC98-4798-BBEA-94E6BB81AE7B}|Protos{BA0F7F5C-EC98-4798-BBEA-94E6BB81AE7B}|solutionrelative:analyze.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA0F7F5C-EC98-4798-BBEA-94E6BB81AE7B}|Protos{BA0F7F5C-EC98-4798-BBEA-94E6BB81AE7B}|C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\preprocess.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{BA0F7F5C-EC98-4798-BBEA-94E6BB81AE7B}|Protos{BA0F7F5C-EC98-4798-BBEA-94E6BB81AE7B}|solutionrelative:preprocess.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}|Wavy\\Wavy.basica.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\wavy\\wavy.basica.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{66AD3EF4-E8A7-4BAF-9E13-19E97EC4603D}|Wavy\\Wavy.basica.csproj|solutionrelative:wavy\\wavy.basica.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4A92590B-4C5B-49A2-A761-592C57A8DCE2}|Wavy.metereologica\\Wavy.metereologica.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\wavy.metereologica\\wavy.metereologica.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{4A92590B-4C5B-49A2-A761-592C57A8DCE2}|Wavy.metereologica\\Wavy.metereologica.csproj|solutionrelative:wavy.metereologica\\wavy.metereologica.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{E9C2836F-A9A5-47D6-AF94-311C58F5A452}|Wavy.pro\\Wavy.pro.csproj|c:\\users\\rodri\\source\\repos\\sistemasdistribuidos2425.2\\monitorizacaooceanica\\wavy.pro\\wavy.pro.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{E9C2836F-A9A5-47D6-AF94-311C58F5A452}|Wavy.pro\\Wavy.pro.csproj|solutionrelative:wavy.pro\\wavy.pro.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\Services\\GreeterService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PreprocessingService\\Services\\GreeterService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\Services\\GreeterService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AnalysisService\\Services\\GreeterService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -61,96 +145,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Gestor.csproj",
-              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Gestor\\Gestor.csproj",
-              "RelativeDocumentMoniker": "Gestor\\Gestor.csproj",
-              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Gestor\\Gestor.csproj",
-              "RelativeToolTip": "Gestor\\Gestor.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-12T15:41:46.83Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Agregador.csproj",
-              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Agregador\\Agregador.csproj",
-              "RelativeDocumentMoniker": "Agregador\\Agregador.csproj",
-              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Agregador\\Agregador.csproj",
-              "RelativeToolTip": "Agregador\\Agregador.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-03T23:15:30.352Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Agregador\\Program.cs",
-              "RelativeDocumentMoniker": "Agregador\\Program.cs",
-              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Agregador\\Program.cs",
-              "RelativeToolTip": "Agregador\\Program.cs",
-              "ViewState": "AgIAAAsCAAAAAAAAAAAqwHcBAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T15:50:37.396Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Program.cs",
-              "RelativeDocumentMoniker": "Servidor 2.0\\Program.cs",
-              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Program.cs",
-              "RelativeToolTip": "Servidor 2.0\\Program.cs",
-              "ViewState": "AgIAACoBAAAAAAAAAAAcwEUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T14:24:43.173Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.metereologica\\Program.cs",
               "RelativeDocumentMoniker": "Wavy.metereologica\\Program.cs",
               "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.metereologica\\Program.cs",
               "RelativeToolTip": "Wavy.metereologica\\Program.cs",
-              "ViewState": "AgIAABkBAAAAAAAAAAAgwEABAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAFoBAAAAAAAAAAAAAF0BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T14:36:38.106Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Servidor 2.0.csproj",
-              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Servidor 2.0.csproj",
-              "RelativeDocumentMoniker": "Servidor 2.0\\Servidor 2.0.csproj",
-              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Servidor 2.0.csproj",
-              "RelativeToolTip": "Servidor 2.0\\Servidor 2.0.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-08T13:48:42.962Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy\\Program.cs",
-              "RelativeDocumentMoniker": "Wavy\\Program.cs",
-              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy\\Program.cs",
-              "RelativeToolTip": "Wavy\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcBAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T15:50:07.01Z",
+              "WhenOpened": "2025-05-22T13:16:46.425Z",
               "EditorCaption": ""
             },
             {
@@ -161,63 +168,375 @@
               "RelativeDocumentMoniker": "Gestor\\Program.cs",
               "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Gestor\\Program.cs",
               "RelativeToolTip": "Gestor\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAALAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAwCAAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T15:30:59.356Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.pro\\Program.cs",
-              "RelativeDocumentMoniker": "Wavy.pro\\Program.cs",
-              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.pro\\Program.cs",
-              "RelativeToolTip": "Wavy.pro\\Program.cs",
-              "ViewState": "AgIAAPgAAAAAAAAAAAAqwCsBAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T14:36:21.858Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Wavy.metereologica.csproj",
-              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.metereologica\\Wavy.metereologica.csproj",
-              "RelativeDocumentMoniker": "Wavy.metereologica\\Wavy.metereologica.csproj",
-              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.metereologica\\Wavy.metereologica.csproj",
-              "RelativeToolTip": "Wavy.metereologica\\Wavy.metereologica.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-08T17:12:32.335Z",
+              "WhenOpened": "2025-05-20T15:51:47.22Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Wavy.pro.csproj",
-              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.pro\\Wavy.pro.csproj",
-              "RelativeDocumentMoniker": "Wavy.pro\\Wavy.pro.csproj",
-              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.pro\\Wavy.pro.csproj",
-              "RelativeToolTip": "Wavy.pro\\Wavy.pro.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAKAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "AnalysisService.csproj",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\AnalysisService.csproj",
+              "RelativeDocumentMoniker": "AnalysisService\\AnalysisService.csproj",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\AnalysisService.csproj",
+              "RelativeToolTip": "AnalysisService\\AnalysisService.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-02T14:36:47.192Z",
+              "WhenOpened": "2025-05-20T16:27:38.62Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Gestor.csproj",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Gestor\\Gestor.csproj",
+              "RelativeDocumentMoniker": "Gestor\\Gestor.csproj",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Gestor\\Gestor.csproj",
+              "RelativeToolTip": "Gestor\\Gestor.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-20T15:33:34.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\appsettings.json",
+              "RelativeDocumentMoniker": "Servidor 2.0\\appsettings.json",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\appsettings.json",
+              "RelativeToolTip": "Servidor 2.0\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-24T12:16:00.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\Program.cs",
+              "RelativeDocumentMoniker": "AnalysisService\\Program.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\Program.cs",
+              "RelativeToolTip": "AnalysisService\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T16:29:05.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Program.cs",
+              "RelativeDocumentMoniker": "Servidor 2.0\\Program.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Program.cs",
+              "RelativeToolTip": "Servidor 2.0\\Program.cs",
+              "ViewState": "AgIAAOgAAAAAAAAAAAApwEkAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T16:43:49.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\Program.cs",
+              "RelativeDocumentMoniker": "Servidor20.UI\\Program.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\Program.cs",
+              "RelativeToolTip": "Servidor20.UI\\Program.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAF8AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T13:58:09.062Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Agregador\\Program.cs",
+              "RelativeDocumentMoniker": "Agregador\\Program.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Agregador\\Program.cs",
+              "RelativeToolTip": "Agregador\\Program.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAQwHwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T15:09:04.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PreprocessingService.csproj",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\PreprocessingService.csproj",
+              "RelativeDocumentMoniker": "PreprocessingService\\PreprocessingService.csproj",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\PreprocessingService.csproj",
+              "RelativeToolTip": "PreprocessingService\\PreprocessingService.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-20T16:23:47.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\Program.cs",
+              "RelativeDocumentMoniker": "PreprocessingService\\Program.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\Program.cs",
+              "RelativeToolTip": "PreprocessingService\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T16:24:12.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AnalysisServiceImpl.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\Services\\AnalysisServiceImpl.cs",
+              "RelativeDocumentMoniker": "AnalysisService\\Services\\AnalysisServiceImpl.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\Services\\AnalysisServiceImpl.cs",
+              "RelativeToolTip": "AnalysisService\\Services\\AnalysisServiceImpl.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T02:25:26.575Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "Microsoft.Common.CurrentVersion.targets",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ViewState": "AgIAAOQUAAAAAAAAAAAcwPMUAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2025-04-09T10:16:41.431Z"
+              "Title": "PreprocessingServiceImpl.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\Services\\PreprocessingServiceImpl.cs",
+              "RelativeDocumentMoniker": "PreprocessingService\\Services\\PreprocessingServiceImpl.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\Services\\PreprocessingServiceImpl.cs",
+              "RelativeToolTip": "PreprocessingService\\Services\\PreprocessingServiceImpl.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAQwI0AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T11:08:04.553Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
+              "Title": "style.css",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\wwwroot\\css\\style.css",
+              "RelativeDocumentMoniker": "Servidor20.UI\\wwwroot\\css\\style.css",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\wwwroot\\css\\style.css",
+              "RelativeToolTip": "Servidor20.UI\\wwwroot\\css\\style.css",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAqwJMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-05-24T18:23:01.07Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\appsettings.json",
+              "RelativeDocumentMoniker": "Servidor20.UI\\appsettings.json",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\appsettings.json",
+              "RelativeToolTip": "Servidor20.UI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-24T17:32:21.685Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "Servidor20.UI\\wwwroot\\index.html",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\wwwroot\\index.html",
+              "RelativeToolTip": "Servidor20.UI\\wwwroot\\index.html",
+              "ViewState": "AgIAACkAAAAAAAAAAAAkwHAAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-05-24T18:23:27.331Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Registo.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Models\\Registo.cs",
+              "RelativeDocumentMoniker": "Servidor 2.0\\Models\\Registo.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Models\\Registo.cs",
+              "RelativeToolTip": "Servidor 2.0\\Models\\Registo.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T12:05:56.166Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "app.js",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\wwwroot\\js\\app.js",
+              "RelativeDocumentMoniker": "Servidor20.UI\\wwwroot\\js\\app.js",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\wwwroot\\js\\app.js",
+              "RelativeToolTip": "Servidor20.UI\\wwwroot\\js\\app.js",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAswGsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-24T18:23:12.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Servidor20.csproj",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Servidor20.csproj",
+              "RelativeDocumentMoniker": "Servidor 2.0\\Servidor20.csproj",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Servidor20.csproj",
+              "RelativeToolTip": "Servidor 2.0\\Servidor20.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-24T17:27:16.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Servidor20.UI.csproj",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\Servidor20.UI.csproj",
+              "RelativeDocumentMoniker": "Servidor20.UI\\Servidor20.UI.csproj",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor20.UI\\Servidor20.UI.csproj",
+              "RelativeToolTip": "Servidor20.UI\\Servidor20.UI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-24T13:59:12.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "MonitoracaoContext.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Data\\MonitoracaoContext.cs",
+              "RelativeDocumentMoniker": "Servidor 2.0\\Data\\MonitoracaoContext.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Servidor 2.0\\Data\\MonitoracaoContext.cs",
+              "RelativeToolTip": "Servidor 2.0\\Data\\MonitoracaoContext.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAwwCEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T12:06:19.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy\\Program.cs",
+              "RelativeDocumentMoniker": "Wavy\\Program.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy\\Program.cs",
+              "RelativeToolTip": "Wavy\\Program.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAApwEUAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T15:50:07.01Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\appsettings.json",
+              "RelativeDocumentMoniker": "PreprocessingService\\appsettings.json",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\appsettings.json",
+              "RelativeToolTip": "PreprocessingService\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-24T17:20:34.438Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Wavy.metereologica.csproj",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.metereologica\\Wavy.metereologica.csproj",
+              "RelativeDocumentMoniker": "Wavy.metereologica\\Wavy.metereologica.csproj",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.metereologica\\Wavy.metereologica.csproj",
+              "RelativeToolTip": "Wavy.metereologica\\Wavy.metereologica.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-22T13:18:45.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.pro\\Program.cs",
+              "RelativeDocumentMoniker": "Wavy.pro\\Program.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.pro\\Program.cs",
+              "RelativeToolTip": "Wavy.pro\\Program.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAApwE4AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T13:16:55.497Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Agregador.csproj",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Agregador\\Agregador.csproj",
+              "RelativeDocumentMoniker": "Agregador\\Agregador.csproj",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Agregador\\Agregador.csproj",
+              "RelativeToolTip": "Agregador\\Agregador.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-20T15:00:19.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "GreeterService.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\Services\\GreeterService.cs",
+              "RelativeDocumentMoniker": "PreprocessingService\\Services\\GreeterService.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\PreprocessingService\\Services\\GreeterService.cs",
+              "RelativeToolTip": "PreprocessingService\\Services\\GreeterService.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T16:31:34.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "GreeterService.cs",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\Services\\GreeterService.cs",
+              "RelativeDocumentMoniker": "AnalysisService\\Services\\GreeterService.cs",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\Services\\GreeterService.cs",
+              "RelativeToolTip": "AnalysisService\\Services\\GreeterService.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T16:35:15.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\appsettings.json",
+              "RelativeDocumentMoniker": "AnalysisService\\appsettings.json",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\AnalysisService\\appsettings.json",
+              "RelativeToolTip": "AnalysisService\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-20T17:11:18.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "analyze.proto",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\analyze.proto",
+              "RelativeDocumentMoniker": "analyze.proto",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\analyze.proto",
+              "RelativeToolTip": "analyze.proto",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
+              "WhenOpened": "2025-05-20T16:22:28.471Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "preprocess.proto",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\preprocess.proto",
+              "RelativeDocumentMoniker": "preprocess.proto",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\preprocess.proto",
+              "RelativeToolTip": "preprocess.proto",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
+              "WhenOpened": "2025-05-20T16:49:11.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
               "Title": "Wavy.basica.csproj",
               "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy\\Wavy.basica.csproj",
               "RelativeDocumentMoniker": "Wavy\\Wavy.basica.csproj",
@@ -227,6 +546,31 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-04-08T14:54:56.358Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Wavy.pro.csproj",
+              "DocumentMoniker": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.pro\\Wavy.pro.csproj",
+              "RelativeDocumentMoniker": "Wavy.pro\\Wavy.pro.csproj",
+              "ToolTip": "C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\Wavy.pro\\Wavy.pro.csproj",
+              "RelativeToolTip": "Wavy.pro\\Wavy.pro.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-22T13:19:02.006Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AgIAAOQUAAAAAAAAAAAcwPMUAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-04-09T10:16:41.431Z"
             }
           ]
         }

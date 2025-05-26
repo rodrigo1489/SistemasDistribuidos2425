@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "I/RBmLmVTcKydmLQViZ0ozcXlPkp4Wm+lZbe6SrOCA8=",
+  "Source": "AnalysisService",
+  "BasePath": "_content/AnalysisService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

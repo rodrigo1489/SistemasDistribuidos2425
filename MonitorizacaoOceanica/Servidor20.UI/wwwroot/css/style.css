@@ -1,0 +1,154 @@
+﻿/* site.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #006377;
+    color: white;
+    padding: 1rem;
+}
+
+    header h1 {
+        margin: 0 0 0.5rem 0;
+    }
+
+nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+    nav button {
+        background: #ccc;
+        border: none;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        color: #333;
+    }
+
+        nav button.active {
+            background: #a3dac9;
+            color: #000;
+        }
+
+main {
+    padding: 1rem;
+}
+
+section {
+    margin-top: 1rem;
+}
+
+.filtros {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+    .filtros label {
+        font-size: 0.9rem;
+    }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.5rem;
+}
+
+    table th, table td {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        text-align: left;
+    }
+
+    table th {
+        background: #f0f0f0;
+    }
+
+.paginacao {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+    .paginacao button {
+        padding: 0.4rem 0.8rem;
+        cursor: pointer;
+    }
+
+.resultado {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+/* overrides adicionais */
+body {
+    background: #f8f9fa;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.tab-content {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background: #006d75;
+    padding: 10px;
+}
+
+    nav button {
+        background: #4fc3f7;
+        border: none;
+        color: white;
+        margin-right: 4px;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+        nav button:hover {
+            background: #3a98b7
+        }
+
+section {
+    padding: 20px
+}
+
+.hidden {
+    display: none
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background: #e0f2f1;
+}
+
+.resultado {
+    margin-top: 20px;
+    padding: 10px;
+    background: #e8f5e9;
+    border: 1px solid #c8e6c9;
+}

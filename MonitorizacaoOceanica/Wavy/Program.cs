@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using RabbitMQ.Client;
+
 
 class WavyBasica
 {
@@ -74,7 +76,7 @@ class WavyBasica
             if (comando == "manual")
             {
                 // Envio manual de dados
-                EnviarDados(agregadorIp, agregadorPorta);
+                PublicarDadosRabbit();
             }
             else if (comando == "desligar")
             {
@@ -157,12 +159,12 @@ class WavyBasica
 
             if (estado == "operação")
             {
-                EnviarDados(ip, porta);
+                PublicarDadosRabbit();
             }
             else if (estado == "associada")
             {
                 // Envia no arranque
-                EnviarDados(ip, porta);
+                PublicarDadosRabbit();
             }
             else
             {
@@ -175,41 +177,28 @@ class WavyBasica
     }
 
     /// Envia dados da WAVY_Básica -> apenas Temperatura
-    static void EnviarDados(string ip, int porta)
+    static void PublicarDadosRabbit()
     {
-        Random rand = new Random();
+        var rand = new Random();
         double valor = rand.Next(18, 26) + rand.NextDouble();
         string timestamp = DateTime.UtcNow.ToString("o");
-        // "DADOS | wavyId | agregadorId | Temperatura | valor | timestamp"
-        string msg = $"DADOS | {wavyId} | {agregadorId} | Temperatura | {valor:F1} | {timestamp}";
+        // CSV: timestamp,valor
+        string payload = $"{timestamp},{valor:F1}";
 
-        try
-        {
-            using TcpClient client = new TcpClient(ip, porta);
-            NetworkStream stream = client.GetStream();
-            stream.Write(Encoding.UTF8.GetBytes(msg));
+        var factory = new ConnectionFactory { HostName = "localhost" };
+        using var conn = factory.CreateConnection();
+        using var channel = conn.CreateModel();
 
-            // Ler resposta do Agregador
-            byte[] buffer = new byte[1024];
-            int bytesRead = stream.Read(buffer, 0, buffer.Length);
-            Console.WriteLine($"[{wavyId}] Temperatura enviada: {Encoding.UTF8.GetString(buffer, 0, bytesRead)}");
-        }
-        catch (Exception ex)
-        {
-            // Falhou o envio
-            erroEnvioCount++;
-            Console.WriteLine($"[{wavyId}] Erro ao enviar (contagem {erroEnvioCount}/{erroEnvioMax}): {ex.Message}");
+        channel.ExchangeDeclare("wavys_data", ExchangeType.Topic, durable: true);
 
-            // Se atingir 10 falhas consecutivas, desligar
-            if (erroEnvioCount >= erroEnvioMax)
-            {
-                Console.WriteLine($"[{wavyId}] Atingiu {erroEnvioCount} erros de envio. A desligar...");
-                EnviarAvisoDesligar();  // tenta avisar
-                RemoverRegisto();
-                Environment.Exit(0);
-            }
-        }
+        string routingKey = $"wavy.{wavyId}.csv";
+        var body = Encoding.UTF8.GetBytes(payload);
+
+        channel.BasicPublish("wavys_data", routingKey, null, body);
+        Console.WriteLine($"[{wavyId}] Pub csv: {payload}");
     }
+
+
 
     /// Envia "ESTADO | wavyId | agregadorId | <novoEstado>" (ex.: "manutenção", "operação") 
     /// para o Agregador atualizar no estado_wavys.txt
@@ -310,5 +299,4 @@ class WavyBasica
         // Fallback se não achamos nada
         return "operação";
     }
-
 }

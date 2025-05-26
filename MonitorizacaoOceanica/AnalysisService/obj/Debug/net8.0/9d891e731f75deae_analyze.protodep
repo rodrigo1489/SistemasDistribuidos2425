@@ -1,0 +1,3 @@
+obj\Debug\net8.0/Analyze.cs \
+obj\Debug\net8.0/AnalyzeGrpc.cs: ../preprocess.proto\
+ ../analyze.proto

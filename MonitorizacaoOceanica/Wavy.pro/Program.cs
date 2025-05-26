@@ -2,8 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
+using RabbitMQ.Client;
+using System.Text;
+using System.Text.Json;
 
 class WavyPro
 {
@@ -74,7 +76,7 @@ class WavyPro
             if (comando == "manual")
             {
                 // Enviar dados manualmente
-                EnviarDados(agregadorIp, agregadorPorta);
+                PublicarDadosRabbitPro();
             }
             else if (comando == "desligar")
             {
@@ -159,12 +161,12 @@ class WavyPro
 
             if (estado == "operação")
             {
-                EnviarDados(ip, porta);
+                PublicarDadosRabbitPro();
             }
             else if (estado == "associada")
             {
                 // podes considerar 'associada' também envia no arranque
-                EnviarDados(ip, porta);
+                PublicarDadosRabbitPro();
             }
             else
             {
@@ -178,12 +180,36 @@ class WavyPro
     }
 
     // Envia ambos os tipos de sensor desta WAVY_Pro: Temperatura e Pressão.
-    static void EnviarDados(string ip, int porta)
+    static void PublicarDadosRabbitPro()
     {
-        // WAVY_Pro => Temperatura e Pressão
-        Enviar(ip, porta, "Temperatura", 18, 26);
-        Enviar(ip, porta, "Pressão", 980, 1050);
+        // 1) Gera valores aleatórios
+        var rand = new Random();
+        double temperatura = rand.Next(18, 26) + rand.NextDouble();
+        double pressao = rand.Next(980, 1050) + rand.NextDouble();
+        string timestamp = DateTime.UtcNow.ToString("o");
+
+        // 2) Monta o objeto e serializa para JSON
+        var obj = new
+        {
+            timestamp,
+            Temperatura = Math.Round(temperatura, 1),
+            Pressao = Math.Round(pressao, 1)
+        };
+        string payload = JsonSerializer.Serialize(obj);
+
+        // 3) Publica no RabbitMQ
+        var factory = new ConnectionFactory { HostName = "localhost" };
+        using var conn = factory.CreateConnection();
+        using var channel = conn.CreateModel();
+
+        channel.ExchangeDeclare("wavys_data", ExchangeType.Topic, durable: true);
+        string routingKey = $"wavy.{wavyId}.json";
+        var body = Encoding.UTF8.GetBytes(payload);
+
+        channel.BasicPublish("wavys_data", routingKey, null, body);
+        Console.WriteLine($"[{wavyId}] Pub json: {payload}");
     }
+
 
     // Função auxiliar para enviar um valor aleatório de um tipo de sensor (Temperatura ou Pressão)
     // e ler a resposta do Agregador. Se der erro consecutivo, ao atingir erroEnvioMax, desliga.
@@ -326,5 +352,4 @@ class WavyPro
         // Fallback se não achamos nada
         return "operação";
     }
-
 }

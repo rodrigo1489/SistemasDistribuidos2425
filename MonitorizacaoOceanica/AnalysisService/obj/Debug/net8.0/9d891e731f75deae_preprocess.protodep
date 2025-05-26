@@ -1,0 +1,2 @@
+obj\Debug\net8.0/Preprocess.cs \
+obj\Debug\net8.0/PreprocessGrpc.cs: ../preprocess.proto

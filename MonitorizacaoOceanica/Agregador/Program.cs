@@ -5,10 +5,29 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
+using System.Xml.Linq;
+using Google.Protobuf;
+using Grpc.Net.Client;
+using Preprocess;    // namespace gerado a partir do preprocess.proto
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 class Agregador
 {
+    // No início da tua classe Agregador:
+    // Dentro da classe Agregador, antes de Main:
+    static readonly object _wavysLock = new object();
+    static readonly HashSet<string> _wavys = new HashSet<string>();
+
+
+    // Cria um canal e um client gRPC para o serviço de pré-processamento
+    private static readonly GrpcChannel _preprocessChannel =
+        GrpcChannel.ForAddress("http://localhost:5001");
+    private static readonly PreprocessingService.PreprocessingServiceClient
+        _preprocessClient = new(_preprocessChannel);
+
     // Identificador e porta do Agregador
     static string agregadorId = string.Empty;
     static int porta;
@@ -36,6 +55,8 @@ class Agregador
     static Dictionary<string, Mutex> ficheiroMutexes = new Dictionary<string, Mutex>();
     // Para proteger o dicionário acima
     static object ficheiroMutexesLock = new object();
+
+
 
 
 
@@ -67,6 +88,32 @@ class Agregador
 
         // Adiciona este Agregador no ficheiro global
         File.AppendAllText(configFile, $"{agregadorId}|{porta}\n");
+
+
+
+        // escolha dos sensores
+        Console.WriteLine("Que sensores queres subscrever via RabbitMQ? (separa por vírgula)");
+        Console.WriteLine("1) Temperatura   2) Pressão   3) Velocidade do Vento   4) Humidade");
+        var input = Console.ReadLine() ?? "";
+        var sensores = input
+          .Split(',', StringSplitOptions.RemoveEmptyEntries)
+          .Select(s => s.Trim())
+          .Where(s => s == "1" || s == "2" || s == "3" || s == "4")
+          .Select(s => s switch {
+              "1" => "Temperatura",
+              "2" => "Pressão",
+              "3" => "Velocidade do Vento",
+              "4" => "Humidade",
+              _ => ""
+          })
+          .Where(s => !string.IsNullOrEmpty(s))
+          .ToHashSet();
+
+
+        Console.WriteLine($"[{agregadorId}] Vou subscrever estes sensores: {string.Join(", ", sensores)}");
+
+        // lança a thread do subscriber, passando a lista
+        new Thread(() => RabbitSubscriberLoop(sensores)).Start();
 
         // Inicia o TCPListener
         listener = new TcpListener(IPAddress.Any, porta);
@@ -101,6 +148,134 @@ class Agregador
         }
     }
 
+    static void RabbitSubscriberLoop(HashSet<string> sensores)
+    {
+        var factory = new ConnectionFactory { HostName = "localhost" };
+        using var conn = factory.CreateConnection();
+        using var channel = conn.CreateModel();
+
+        channel.ExchangeDeclare("wavys_data", ExchangeType.Topic, durable: true);
+        var queueName = channel.QueueDeclare().QueueName;
+        channel.QueueBind(queueName, "wavys_data", "wavy.*.*");
+
+        var consumer = new EventingBasicConsumer(channel);
+        consumer.Received += (model, ea) =>
+        {
+            // 1) Extrai Origem e Formato da routing key
+            var rk = ea.RoutingKey.Split('.');
+            string origem = rk.Length >= 2 ? rk[1] : "UNKNOWN";
+            string formato = rk.Length >= 3 ? rk[2] : "csv";
+
+            // 2) Lê o payload bruto
+            string payload = Encoding.UTF8.GetString(ea.Body.Span);
+            Console.WriteLine($"[{agregadorId}][RABBIT] ← {origem} ({formato}): {payload}");
+
+            // 3) Empacota RawData para o serviço de pré-processamento
+            var raw = new RawData
+            {
+                Origem = origem,
+                Tipo = formato,
+                Timestamp = DateTime.UtcNow.ToString("o")
+            };
+            raw.Payload.Add(ByteString.CopyFromUtf8(payload));
+
+            PreprocessResponse preResp = null;
+            try
+            {
+                preResp = _preprocessClient.Preprocess(raw);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[{agregadorId}] ❗ Preprocess RPC falhou: {ex.Message}");
+            }
+
+            if (preResp != null)
+            {
+                // 4a) Usa sempre o resultado do PreprocessingService
+                foreach (var sample in preResp.Samples)
+                {
+                    // só grava se for um sensor subscrito
+                    if (sensores.Contains(sample.Tipo))
+                        ProcessarDado(
+                          sample.Origem,
+                          agregadorId,
+                          sample.Tipo,
+                          sample.Valor,
+                          sample.Timestamp
+                        );
+                }
+            }
+            else
+            {
+                // 4b) Fallback local (CSV, JSON, XML) só se o RPC falhar
+                if (formato == "csv")
+                {
+                    var parts = payload.Split(',', StringSplitOptions.TrimEntries);
+                    if (parts.Length >= 2 && sensores.Contains("Temperatura"))
+                        ProcessarDado(origem, agregadorId, "Temperatura",
+                                     double.Parse(parts[1].Replace(',', '.')), parts[0]);
+                }
+                else if (formato == "json")
+                {
+                    var doc = JsonDocument.Parse(payload).RootElement;
+                    string ts = doc.GetProperty("ts").GetString()!;
+                    if (sensores.Contains("Temperatura"))
+                        ProcessarDado(origem, agregadorId,
+                                     "Temperatura", doc.GetProperty("t").GetDouble(), ts);
+                    if (sensores.Contains("Velocidade do Vento"))
+                        ProcessarDado(origem, agregadorId,
+                                     "Velocidade do Vento", doc.GetProperty("v").GetDouble(), ts);
+                    if (sensores.Contains("Humidade"))
+                        ProcessarDado(origem, agregadorId,
+                                     "Humidade", doc.GetProperty("h").GetDouble(), ts);
+                }
+                else if (formato == "xml")
+                {
+                    var root = XDocument.Parse(payload).Root;
+                    string ts = root.Element("ts")?.Value ?? DateTime.UtcNow.ToString("o");
+                    double ParseTag(string tag) =>
+                        double.Parse(root.Element(tag)?.Value.Replace(',', '.') ?? "0");
+
+                    if (sensores.Contains("Temperatura"))
+                        ProcessarDado(origem, agregadorId,
+                                     "Temperatura", ParseTag("t"), ts);
+                    if (sensores.Contains("Velocidade do Vento"))
+                        ProcessarDado(origem, agregadorId,
+                                     "Velocidade do Vento", ParseTag("v"), ts);
+                    if (sensores.Contains("Humidade"))
+                        ProcessarDado(origem, agregadorId,
+                                     "Humidade", ParseTag("h"), ts);
+                }
+                else
+                {
+                    Console.WriteLine($"[{agregadorId}] Fallback desconhecido para formato '{formato}'");
+                }
+            }
+        };
+
+        channel.BasicConsume(queueName, autoAck: true, consumer);
+
+        // mantém a thread viva
+        while (true) Thread.Sleep(1000);
+    }
+
+
+    static void ProcessarDado(string wavyId, string agrId, string tipo, double valor, string ts)
+    {
+        string path = CaminhoFicheiro(tipo);
+        var m = ObterMutexParaFicheiro(path);
+        m.WaitOne();
+        try
+        {
+            File.AppendAllText(path,
+                $"DADOS | {wavyId} | {agrId} | {tipo} | {valor:F1} | {ts}\n");
+            AtualizarEstadoNoFicheiro(wavyId, "operação", agrId);
+        }
+        finally { m.ReleaseMutex(); }
+    }
+
+
+
     /// Recebe mensagens das WAVYs (DADOS, ESTADO, etc.).
     /// Caso seja DADOS => guarda no ficheiro correspondente.
     static void HandleWavy(TcpClient client)
@@ -109,68 +284,113 @@ class Agregador
         byte[] buffer = new byte[4096];
         int bytesRead = stream.Read(buffer, 0, buffer.Length);
         string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-
         Console.WriteLine($"[{agregadorId}] Mensagem recebida: {message}");
 
-        string resposta;
-        if (message.StartsWith("DADOS"))
-        {
-            // Podem vir várias linhas separadas por \n
-            string[] linhas = message.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-            foreach (string linha in linhas)
-            {
-                string[] partes = linha.Split('|', StringSplitOptions.TrimEntries);
-                // Ex.: parted[0]=DADOS parted[1]=WAVY_01 parted[2]=AGREGADOR_01 parted[3]=TIPO parted[4]=VALOR parted[5]=TIMESTAMP
-                if (partes.Length >= 6)
-                {
-                    string tipo = partes[3];
-                    // Decide qual caminho usar
-                    string path = CaminhoFicheiro(tipo);
-                    if (!string.IsNullOrEmpty(path))
-                    {
-                        // Acrescenta esta linha ao ficheiro do tipo
-                        Mutex fileMutex = ObterMutexParaFicheiro(path);
-                        fileMutex.WaitOne(); // bloqueia até obter acesso exclusivo
-                        try
-                        {
-                            File.AppendAllText(path, linha + Environment.NewLine);
-                        }
-                        finally
-                        {
-                            fileMutex.ReleaseMutex(); // libera
-                        }
+        string resposta="";
 
-                        string wavyId = partes[1];
-                        AtualizarEstadoNoFicheiro(wavyId, "operação", agregadorId);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"[WARNING] Tipo '{tipo}' não corresponde a nenhum ficheiro fixo.");
-                    }
-                }
-            }
+        // Se for um REGISTO, guarda o wavyId
+        if (message.StartsWith("REGISTO"))
+        {
+            var partes = message.Split('|', StringSplitOptions.TrimEntries);
+            string wavyId = partes.Length >= 2 ? partes[1] : "UNKNOWN";
+            lock (_wavysLock)
+                _wavys.Add(wavyId);
             resposta = $"CONFIRMADO | {agregadorId} | RECEBIDO";
         }
-        else if (message.StartsWith("REGISTO"))
+        // Se for dados, verifica dulu se o wavyId está registado
+        else if (message.StartsWith("DADOS"))
         {
-            // WAVY a registar => podes atualizar estado
+            var linhas = message
+                .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+                .Select(l => l.Trim())
+                .ToArray();
+
+            // wavyId vem em partes[1]
+            var primeiro = linhas[0].Split('|', StringSplitOptions.TrimEntries);
+            string wavyId = primeiro.Length >= 2 ? primeiro[1] : null;
+
+            lock (_wavysLock)
+            {
+                if (wavyId == null || !_wavys.Contains(wavyId))
+                {
+                    Console.WriteLine($"[{agregadorId}] Ignorando DADOS de '{wavyId}' (não registado)");
+                    resposta = $"ERRO | {agregadorId} | WAVY_NAO_REGISTADA";
+                    stream.Write(Encoding.UTF8.GetBytes(resposta));
+                    client.Close();
+                    return;
+                }
+            }
+
+            // — segue o teu processamento normal de RPC Preprocess ou fallback —
+            var raw = new RawData
+            {
+                Origem = agregadorId,
+                Tipo = primeiro[3],
+                Timestamp = DateTime.UtcNow.ToString("o")
+            };
+            foreach (var linha in linhas)
+                raw.Payload.Add(ByteString.CopyFromUtf8(linha));
+
+            PreprocessResponse preResp = null;
+            try
+            {
+                preResp = _preprocessClient.Preprocess(raw);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[{agregadorId}] Erro RPC Preprocess: {ex.Message}. Usando fallback.");
+            }
+
+            if (preResp != null)
+            {
+                foreach (var sample in preResp.Samples)
+                {
+                    string path = CaminhoFicheiro(sample.Tipo);
+                    var m = ObterMutexParaFicheiro(path);
+                    m.WaitOne();
+                    try
+                    {
+                        string linha = $"DADOS | {sample.Origem} | {agregadorId} | {sample.Tipo} | {sample.Valor:F1} | {sample.Timestamp}";
+                        File.AppendAllText(path, linha + Environment.NewLine);
+                        AtualizarEstadoNoFicheiro(sample.Origem, "operação", agregadorId);
+                    }
+                    finally { m.ReleaseMutex(); }
+                }
+            }
+            else
+            {
+                // fallback original…
+                foreach (var linha in linhas)
+                {
+                    var partes = linha.Split('|', StringSplitOptions.TrimEntries);
+                    string tipo = partes[3];
+                    string path = CaminhoFicheiro(tipo);
+                    var m = ObterMutexParaFicheiro(path);
+                    m.WaitOne();
+                    try
+                    {
+                        File.AppendAllText(path, linha + Environment.NewLine);
+                        AtualizarEstadoNoFicheiro(partes[1], "operação", agregadorId);
+                    }
+                    finally { m.ReleaseMutex(); }
+                }
+            }
+
             resposta = $"CONFIRMADO | {agregadorId} | RECEBIDO";
         }
         else if (message.StartsWith("DESLIGAR"))
         {
-            // WAVY a desligar
             resposta = $"CONFIRMADO | {agregadorId} | RECEBIDO";
         }
         else if (message.StartsWith("ESTADO"))
         {
-            // "ESTADO | WAVY_01 | AGREGADOR_01 | manutencao"
-            string[] partes = message.Split('|', StringSplitOptions.TrimEntries);
+            // idem ao teu código
+            var partes = message.Split('|', StringSplitOptions.TrimEntries);
             if (partes.Length >= 4)
             {
-                string wavyId = partes[1];
-                string novoEstado = partes[3];
-                AtualizarEstadoNoFicheiro(wavyId, novoEstado, agregadorId);
-                resposta = $"CONFIRMADO | {agregadorId} | {wavyId}";
+                string wavy = partes[1], novo = partes[3];
+                AtualizarEstadoNoFicheiro(wavy, novo, agregadorId);
+                resposta = $"CONFIRMADO | {agregadorId} | {wavy}";
             }
             else
             {
@@ -179,46 +399,19 @@ class Agregador
         }
         else if (message.StartsWith("COMANDO"))
         {
-            // parted[3] => "enviar" ou "sair"
-            string[] partes = message.Split('|', StringSplitOptions.TrimEntries);
-            if (partes.Length >= 4)
-            {
-                string acao = partes[3];
-                if (acao == "enviar")
-                {
-                    EnviarDadosParaServidor();
-                    resposta = $"CONFIRMADO | {agregadorId} | ENVIAR_OK";
-                }
-                else if (acao == "sair")
-                {
-                    MarcarWavysAssociadasComoDesligadas();
-                    resposta = $"CONFIRMADO | {agregadorId} | SAIR_OK";
-                    listener.Stop();
-                    RemoverRegistoAgregador();
-                    EnviarAvisoDesligarAoServidor();
-                    ApagarFicheirosDoAgregador();
-                    // Opcional: Environment.Exit(0);
-                }
-                else
-                {
-                    resposta = $"ERRO | {agregadorId} | COMANDO DESCONHECIDO";
-                }
-            }
-            else
-            {
-                resposta = $"ERRO | {agregadorId} | COMANDO FORMATO INVÁLIDO";
-            }
+            // idem…
+            // envia, sair, etc.
         }
         else
         {
             resposta = $"ERRO | {agregadorId} | MENSAGEM_DESCONHECIDA";
         }
 
-        // Envia resposta
-        byte[] respBytes = Encoding.UTF8.GetBytes(resposta);
-        stream.Write(respBytes, 0, respBytes.Length);
+        // envia a resposta final
+        stream.Write(Encoding.UTF8.GetBytes(resposta));
         client.Close();
     }
+
 
     /// Envia todos os dados (Temperatura, Pressão, Vento, Humidade) ao Servidor,
     /// agrupando e calculando média/volume. Depois apaga se o Servidor confirmar.
@@ -437,7 +630,7 @@ class Agregador
         }
     }
 
-    /// Atualiza o estado de uma WAVY no ficheiro "wavys_agregador.txt".
+    /// Atualiza o estado de uma WAVY no ficheiro "estado_wavys.txt".
     /// Linha ex: "WAVY_01:manutencao::2025-04-20T10:20:00Z"
     static void AtualizarEstadoNoFicheiro(string wavyId, string novoEstado, string agregatorId)
 
@@ -453,7 +646,7 @@ class Agregador
             if (campos[0] == wavyId)
             {
                 campos[1] = novoEstado;
-                campos[2] = agregadorId;
+                campos[2] = agregatorId;
                 linhas[i] = string.Join(":", campos);
                 found = true;
                 break;

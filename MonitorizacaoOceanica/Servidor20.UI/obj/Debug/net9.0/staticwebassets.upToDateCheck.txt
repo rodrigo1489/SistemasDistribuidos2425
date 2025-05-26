@@ -1,0 +1,6 @@
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Servidor20.UI\wwwroot\css\style.css
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Servidor20.UI\wwwroot\js\app.js
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Servidor20.UI\wwwroot\index.html
+wwwroot\css\style.css
+wwwroot\index.html
+wwwroot\js\app.js

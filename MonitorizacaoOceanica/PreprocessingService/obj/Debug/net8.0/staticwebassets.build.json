@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "Wc1jXBAGIWRqQeB+2ciae1txkre2ajcNrTq6Q0zMsoA=",
+  "Source": "PreprocessingService",
+  "BasePath": "_content/PreprocessingService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

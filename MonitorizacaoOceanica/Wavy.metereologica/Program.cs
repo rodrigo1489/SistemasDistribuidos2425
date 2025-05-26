@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RabbitMQ.Client;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -74,7 +75,7 @@ class WavyMeteorologica
             if (comando == "manual")
             {
                 // Envio manual de dados (Temperatura, Vento, Humidade)
-                EnviarDados(agregadorIp, agregadorPorta);
+                PublicarDadosRabbitMeteorologica();
             }
             else if (comando == "desligar")
             {
@@ -93,7 +94,7 @@ class WavyMeteorologica
         }
     }
 
-    /// Gera automaticamente um ID do tipo "WAVY_01", "WAVY_02", etc.
+    /// Gera um ID automático único (WAVY_01, WAVY_02, etc.).
     /// Lê o ficheiro configFile para não repetir IDs.
     static string GerarWavyIdDisponivel()
     {
@@ -157,12 +158,12 @@ class WavyMeteorologica
 
             if (estado == "operação")
             {
-                EnviarDados(ip, porta);
+                PublicarDadosRabbitMeteorologica();
             }
             else if (estado == "associada")
             {
                 // podes enviar no arranque 
-                EnviarDados(ip, porta);
+                PublicarDadosRabbitMeteorologica();
             }
             else
             {
@@ -174,12 +175,38 @@ class WavyMeteorologica
     }
 
     /// WAVY Meteorológica -> envia (Temperatura, Velocidade do Vento, Humidade) de cada vez.
-    static void EnviarDados(string ip, int porta)
+    static void PublicarDadosRabbitMeteorologica()
     {
-        Enviar(ip, porta, "Temperatura", 18, 26);
-        Enviar(ip, porta, "Velocidade do Vento", 0, 30);
-        Enviar(ip, porta, "Humidade", 30, 100);
+        // Gera valores aleatórios
+        var rand = new Random();
+        double temp = rand.Next(18, 26) + rand.NextDouble();
+        double vento = rand.Next(0, 30) + rand.NextDouble();
+        double hum = rand.Next(30, 100) + rand.NextDouble();
+        string timestamp = DateTime.UtcNow.ToString("o");
+
+        // Monta o XML
+        string payload =
+          $"<d>" +
+            $"<ts>{timestamp}</ts>" +
+            $"<t>{temp:F1}</t>" +
+            $"<v>{vento:F1}</v>" +
+            $"<h>{hum:F1}</h>" +
+          $"</d>";
+
+        // Publica no RabbitMQ
+        var factory = new ConnectionFactory { HostName = "localhost" };
+        using var conn = factory.CreateConnection();
+        using var channel = conn.CreateModel();
+        channel.ExchangeDeclare("wavys_data", ExchangeType.Topic, durable: true);
+
+        // Routing key inclui o tipo de ficheiro
+        string routingKey = $"wavy.{wavyId}.xml";
+        var body = Encoding.UTF8.GetBytes(payload);
+        channel.BasicPublish("wavys_data", routingKey, null, body);
+
+        Console.WriteLine($"[{wavyId}] Pub xml: {payload}");
     }
+
 
     /// Envia de facto cada tipo de sensor, construindo a string "DADOS | wavyId | agregadorId | tipo | valor | timestamp"
     /// Tenta conectar ao Agregador e ler a resposta. Se falhar, incrementa erroEnvioCount.
@@ -319,5 +346,4 @@ class WavyMeteorologica
         // Fallback se não achamos nada
         return "operação";
     }
-
 }

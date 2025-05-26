@@ -3,11 +3,14 @@ C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wav
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\bin\Debug\net8.0\Wavy.pro.runtimeconfig.json
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\bin\Debug\net8.0\Wavy.pro.dll
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\bin\Debug\net8.0\Wavy.pro.pdb
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\bin\Debug\net8.0\RabbitMQ.Client.dll
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\obj\Debug\net8.0\Wavy.pro.csproj.AssemblyReference.cache
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\obj\Debug\net8.0\Wavy.pro.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\obj\Debug\net8.0\Wavy.pro.AssemblyInfoInputs.cache
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\obj\Debug\net8.0\Wavy.pro.AssemblyInfo.cs
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\obj\Debug\net8.0\Wavy.pro.csproj.CoreCompileInputs.cache
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\obj\Debug\net8.0\Wavy.pro.sourcelink.json
+C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\obj\Debug\net8.0\Wavy.pro.csproj.Up2Date
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\obj\Debug\net8.0\Wavy.pro.dll
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\obj\Debug\net8.0\refint\Wavy.pro.dll
 C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Wavy.pro\obj\Debug\net8.0\Wavy.pro.pdb

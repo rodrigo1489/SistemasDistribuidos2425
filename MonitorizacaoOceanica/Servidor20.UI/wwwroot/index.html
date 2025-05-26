@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <title>Monitorização Oceânica</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Monitorização Oceânica</a>
+            <div class="navbar-nav">
+                <a class="nav-link active" href="#" id="navRegistos">Registos</a>
+                <a class="nav-link" href="#" id="navAnalises">Análises</a>
+                <a class="nav-link" href="#" id="navManual">Análise Manual</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        <!-- Registos -->
+        <div id="tabRegistos" class="tab-content">
+            <h2>100 Últimos Registos</h2>
+            <form id="filtrosRegistos" class="row g-3 mb-3">
+                <div class="col-md-4">
+                    <input type="text" id="fWavy" class="form-control" placeholder="WavyId (ex: WAVY_01)">
+                </div>
+                <div class="col-md-4">
+                    <select id="fTipoMsg" class="form-select">
+                        <option value="">(Todos)</option>
+                        <option value="DADOS">DADOS</option>
+                        <option value="REGISTO">REGISTO</option>
+                        <option value="ANALISE">ANALISE</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </form>
+
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Wavy</th>
+                        <th>Sensor</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody id="tblRegistosBody">
+                    <tr><td colspan="4" class="text-center">A carregar…</td></tr>
+                </tbody>
+            </table>
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"><button class="page-link" id="btnPrev">«</button></li>
+                    <li class="page-item disabled"><span class="page-link" id="pageInfo">1</span></li>
+                    <li class="page-item"><button class="page-link" id="btnNext">»</button></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Análises -->
+        <div id="tabAnalises" class="tab-content" style="display:none">
+            <h2>Análises Automáticas</h2>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Sensor</th>
+                        <th>Média</th>
+                        <th>Desvio Padrão</th>
+                    </tr>
+                </thead>
+                <tbody id="tblAnalisesBody">
+                    <tr><td colspan="4" class="text-center">Sem dados…</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Análise Manual -->
+        <div id="tabManual" class="tab-content" style="display:none">
+            <h2>Análise Manual</h2>
+            <form id="formManual" class="row g-3 mb-3">
+                <div class="col-md-3">
+                    <select id="mSensor" class="form-select" required>
+                        <option value="">Seleciona sensor</option>
+                        <option>Temperatura</option>
+                        <option>Pressão</option>
+                        <option>Humidade</option>
+                        <option>Velocidade do Vento</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="datetime-local" id="mDi" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="datetime-local" id="mDf" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success">Analisar</button>
+                </div>
+            </form>
+            <div id="mResult" class="alert alert-info d-none"></div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

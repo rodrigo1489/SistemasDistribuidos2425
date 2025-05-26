@@ -56,7 +56,11 @@
           "dependencies": {
             "ClosedXML": {
               "target": "Package",
-              "version": "[0.104.2, )"
+              "version": "[0.105.0, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.8.1, )"
             }
           },
           "imports": [

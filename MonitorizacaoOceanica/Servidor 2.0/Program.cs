@@ -4,388 +4,312 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Data.SqlClient;
 using ClosedXML.Excel;
 using System.Collections.Generic;
+using Grpc.Net.Client;
+using Analyze;            // gRPC Analysis service namespace
+using Preprocess;         // gRPC Preprocess service namespace
+using Microsoft.EntityFrameworkCore;
+using Servidor20.Data;    // EF Core DbContext namespace
+using Servidor20.Models;  // EF Core entity namespace
 
-class Servidor
+namespace Servidor20
 {
-    // Lock para proteger acesso simultâneo ao ficheiro Excel
-    static object fileLock = new object();
-
-    // Caminho para o ficheiro Excel onde guardamos os dados
-    static string excelFilePath = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\dados_servidor.xlsx";
-
-    // String de conexão à base de dados SQL Server
-    static string connString = "Server=localhost,1433;Database=MonitorizacaoOceanica;Trusted_Connection=True;";
-
-    // Dicionário de Mutexes, um por cada Agregador (ou origem)
-    // para garantir acesso exclusivo quando várias threads gravam simultaneamente
-    static Dictionary<string, Mutex> ficheiroMutexes = new Dictionary<string, Mutex>();
-
-    // Lock para proteger o dicionário de Mutexes acima
-    static object mutexLock = new object();
-
-    static void Main()
+    class Servidor
     {
-        // Se o servidor for interrompido (Ctrl+C), limpa ficheiros e sai
-        Console.CancelKeyPress += (sender, e) =>
-        {
-            e.Cancel = true;
-            Console.WriteLine("[SERVIDOR] Encerramento forçado detetado. A limpar ficheiros...");
-            LimparFicheirosDeRegisto();
-            Environment.Exit(0);
-        };
+        static string connString =
+          "Server=localhost,1433;" +
+          "Database=MonitorizacaoOceanica;" +
+          "Trusted_Connection=True;" +
+          "Encrypt=False;" +
+          "TrustServerCertificate=True;";
 
-        // Abre um TcpListener na porta 9000, onde aguarda ligações (Agregadores)
-        TcpListener listener = new TcpListener(IPAddress.Any, 9000);
-        listener.Start();
-        Console.WriteLine("[SERVIDOR] À escuta na porta 9000...");
+        // gRPC channels & clients
+        private static readonly GrpcChannel _analysisChannel =
+            GrpcChannel.ForAddress("http://localhost:5002");
+        private static readonly AnalysisService.AnalysisServiceClient
+            _analysisClient = new(_analysisChannel);
 
-        // Cria uma thread adicional para ler comandos da consola
-        // Se digitar "desligar servidor", limpa e sai
-        new Thread(() =>
+        // Excel lock and path
+        static object fileLock = new object();
+        static string excelFilePath = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\dados_servidor.xlsx";
+
+        // Mutexes per agregador for thread-safe file writes
+        static Dictionary<string, Mutex> ficheiroMutexes = new();
+        static object mutexLock = new();
+
+        static void Main()
         {
+            Console.CancelKeyPress += (s, e) =>
+            {
+                e.Cancel = true;
+                LimparFicheirosDeRegisto();
+                ApagarConteudoAgregadorData();
+                Environment.Exit(0);
+            };
+
+            var listener = new TcpListener(IPAddress.Any, 9000);
+            listener.Start();
+            Console.WriteLine("[SERVIDOR] À escuta na porta 9000...");
+
+            // console command thread
+            new Thread(() =>
+            {
+                while (true)
+                {
+                    var cmd = Console.ReadLine();
+                    if (cmd?.ToLower() == "desligar servidor")
+                    {
+                        LimparFicheirosDeRegisto();
+                        ApagarConteudoAgregadorData();
+                        Environment.Exit(0);
+                    }
+                }
+            }).Start();
+
             while (true)
             {
-                string? comando = Console.ReadLine();
-                if (comando?.ToLower() == "desligar servidor")
-                {
-                    Console.WriteLine("[SERVIDOR] Comando 'desligar servidor' executado. A encerrar...");
-                    LimparFicheirosDeRegisto();
-                    ApagarConteudoAgregadorData();
-                    Environment.Exit(0);
-                }
+                var client = listener.AcceptTcpClient();
+                new Thread(() => HandleClient(client)).Start();
             }
-        }).Start();
-
-        // Loop principal: a cada nova ligação, inicia uma thread para HandleClient
-        while (true)
-        {
-            TcpClient client = listener.AcceptTcpClient();
-            Thread thread = new Thread(() => HandleClient(client));
-            thread.Start();
         }
-    }
 
-    /// Retorna (ou cria) um Mutex específico para cada AgregadorId,
-    /// garantindo que só uma thread pode processar dados daquele agregador ao mesmo tempo.
-    static Mutex ObterMutexParaAgregador(string agregadorId)
-    {
-        lock (mutexLock)
+        static Mutex ObterMutexParaAgregador(string aggId)
         {
-            if (!ficheiroMutexes.ContainsKey(agregadorId))
+            lock (mutexLock)
             {
-                ficheiroMutexes[agregadorId] = new Mutex();
+                if (!ficheiroMutexes.ContainsKey(aggId))
+                    ficheiroMutexes[aggId] = new Mutex();
+                return ficheiroMutexes[aggId];
             }
-            return ficheiroMutexes[agregadorId];
         }
-    }
 
-    /// Guarda um registo na base de dados SQL Server, na tabela "Registos".
-    /// Each registo tem (TipoMensagem,AgregadorId,WavyId,TipoDado,Valor,Volume,Metodo,Timestamp,Origem,Destino).
-    static void GuardarNoSQLServer(
-        string tipoMensagem,
-        string agregadorId,
-        string wavyId,
-        string tipoDado,
-        double valor,
-        int volume,
-        string metodo,
-        string timestampStr,
-        string origem,
-        string destino
-    )
-    {
-        using var conn = new SqlConnection(connString);
-        conn.Open();
-
-        string sql = @"
-INSERT INTO Registos
-(TipoMensagem, AgregadorId, WavyId, TipoDado, Valor, Volume, Metodo, Timestamp, Origem, Destino)
-VALUES (@TipoMensagem, @AgregadorId, @WavyId, @TipoDado, @Valor, @Volume, @Metodo, @Timestamp, @Origem, @Destino);
-";
-
-        using var cmd = new SqlCommand(sql, conn);
-        cmd.Parameters.AddWithValue("@TipoMensagem", tipoMensagem);
-        cmd.Parameters.AddWithValue("@AgregadorId", agregadorId);
-        cmd.Parameters.AddWithValue("@WavyId", wavyId);
-        cmd.Parameters.AddWithValue("@TipoDado", tipoDado);
-        cmd.Parameters.AddWithValue("@Valor", valor);
-        cmd.Parameters.AddWithValue("@Volume", volume);
-        cmd.Parameters.AddWithValue("@Metodo", metodo);
-        cmd.Parameters.AddWithValue("@Timestamp", DateTime.Parse(timestampStr));
-        cmd.Parameters.AddWithValue("@Origem", origem);
-        cmd.Parameters.AddWithValue("@Destino", destino);
-
-        cmd.ExecuteNonQuery();
-    }
-
-    /// Guarda também os dados no Excel "dados_servidor.xlsx", numa folha "Registos".
-    /// Cria cabeçalhos se ainda estiver vazia.
-    static void GuardarNoExcel(
-         string tipoMensagem,
-         string agregadorId,
-         string wavyId,
-         string tipoDado,
-         double valor,
-         int volume,
-         string metodo,
-         string timestampStr,
-         string origem,
-         string destino
-     )
-    {
-        lock (fileLock)
+        static void GuardarNoExcel(Registo r)
         {
-            // Carrega ou cria a workbook
-            var wb = File.Exists(excelFilePath) ?
-                     new XLWorkbook(excelFilePath) : new XLWorkbook();
-
-            // Usa a folha "Registos"
-            string folha = "Registos";
-            var ws = wb.Worksheets.Contains(folha) ?
-                     wb.Worksheet(folha) :
-                     wb.Worksheets.Add(folha);
-
-            // Se não houver linha usada, cria cabeçalhos
-            if (ws.LastRowUsed() == null)
+            lock (fileLock)
             {
-                string[] headers = {
-                    "TipoMensagem","AgregadorId","WavyId","TipoDado","Valor","Volume","Metodo","Timestamp","Origem","Destino"
-                };
-                for (int i = 0; i < headers.Length; i++)
+                var wb = File.Exists(excelFilePath)
+                    ? new XLWorkbook(excelFilePath)
+                    : new XLWorkbook();
+                var ws = wb.Worksheets.Contains("Registos")
+                    ? wb.Worksheet("Registos")
+                    : wb.Worksheets.Add("Registos");
+
+                if (ws.LastRowUsed() == null)
                 {
-                    ws.Cell(1, i + 1).Value = headers[i];
-                    ws.Cell(1, i + 1).Style.Font.Bold = true;
-                }
-            }
-
-            // Última linha usada, +1 para inserir novo registo
-            int row = ws.LastRowUsed()?.RowNumber() + 1 ?? 2;
-
-            // Preenche cada coluna
-            ws.Cell(row, 1).Value = tipoMensagem;
-            ws.Cell(row, 2).Value = agregadorId;
-            ws.Cell(row, 3).Value = wavyId;
-            ws.Cell(row, 4).Value = tipoDado;
-            ws.Cell(row, 5).Value = valor;
-            ws.Cell(row, 6).Value = volume;
-            ws.Cell(row, 7).Value = metodo;
-            ws.Cell(row, 8).Value = timestampStr;
-            ws.Cell(row, 9).Value = origem;
-            ws.Cell(row, 10).Value = destino;
-
-            // Guarda as alterações
-            wb.SaveAs(excelFilePath);
-        }
-    }
-
-    /// Trata cada cliente (Agregador ou WAVY) que se liga ao servidor.
-    /// Lê a mensagem e responde adequadamente (REGISTO, DADOS, DESLIGAR, COMANDO...).
-    static void HandleClient(TcpClient client)
-    {
-        var stream = client.GetStream();
-        byte[] buffer = new byte[4096];
-        int bytesRead = stream.Read(buffer, 0, buffer.Length);
-        string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-        Console.WriteLine("[SERVIDOR] Recebido: \n" + message);
-
-        // Inicializa a resposta (tem de ter sempre algum valor, evitando "use of unassigned local variable")
-        string resposta = "";
-
-        try
-        {
-            // REGISTO ou DESLIGAR => apenas confirma
-            if (message.StartsWith("REGISTO") || message.StartsWith("DESLIGAR"))
-            {
-                resposta = "CONFIRMADO | SERVIDOR_01 | RECEBIDO";
-            }
-            else if (message.StartsWith("DADOS"))
-            {
-                // Pode vir várias linhas (separadas por \n) se o Agregador agrupar
-                string[] linhas = message.Split("\n", StringSplitOptions.RemoveEmptyEntries);
-
-                // Descobre o agregadorId para o Mutex
-                string agregadorIdParaMutex = "DESCONHECIDO";
-                if (linhas.Length > 0)
-                {
-                    var partesTemp = linhas[0].Split('|', StringSplitOptions.TrimEntries);
-                    if (partesTemp.Length >= 2)
+                    var headers = new[]
                     {
-                        // parted[1] costuma ser "AGREGADOR_XX" ou "WAVY_XX"
-                        agregadorIdParaMutex = partesTemp[1];
+                        "Id","TipoMensagem","AgregadorId","WavyId","TipoDado","Valor",
+                        "Volume","Metodo","Timestamp","Origem","Destino","Media","DesvioPadrao"
+                    };
+                    for (int i = 0; i < headers.Length; i++)
+                    {
+                        ws.Cell(1, i + 1).Value = headers[i];
+                        ws.Cell(1, i + 1).Style.Font.Bold = true;
                     }
                 }
 
-                // Obter/ criar Mutex para este agregador
-                Mutex mutex = ObterMutexParaAgregador(agregadorIdParaMutex);
-                mutex.WaitOne(); // bloqueia até ter acesso exclusivo
+                int row = ws.LastRowUsed().RowNumber() + 1;
+                ws.Cell(row, 1).Value = r.Id;
+                ws.Cell(row, 2).Value = r.TipoMensagem;
+                ws.Cell(row, 3).Value = r.AgregadorId;
+                ws.Cell(row, 4).Value = r.WavyId;
+                ws.Cell(row, 5).Value = r.TipoDado;
+                ws.Cell(row, 6).Value = r.Valor;
+                ws.Cell(row, 7).Value = r.Volume;
+                ws.Cell(row, 8).Value = r.Metodo;
+                ws.Cell(row, 9).Value = r.Timestamp.ToString("o");
+                ws.Cell(row, 10).Value = r.Origem;
+                ws.Cell(row, 11).Value = r.Destino;
+                ws.Cell(row, 12).Value = r.Media;
+                ws.Cell(row, 13).Value = r.DesvioPadrao;
 
-                try
+                wb.SaveAs(excelFilePath);
+            }
+        }
+
+        static void HandleClient(TcpClient client)
+        {
+            using var stream = client.GetStream();
+            var buf = new byte[4096];
+            int read = stream.Read(buf, 0, buf.Length);
+            var message = Encoding.UTF8.GetString(buf, 0, read);
+            Console.WriteLine("[SERVIDOR] Recebido:\n" + message);
+
+            string response = "ERRO | SERVIDOR_01 | MENSAGEM_DESCONHECIDA";
+
+            try
+            {
+                if (message.StartsWith("REGISTO") || message.StartsWith("DESLIGAR"))
                 {
-                    // Para cada linha "DADOS..."
-                    foreach (string linha in linhas)
+                    response = "CONFIRMADO | SERVIDOR_01 | RECEBIDO";
+                }
+                else if (message.StartsWith("DADOS"))
+                {
+                    var lines = message
+                        .Split('\n', StringSplitOptions.RemoveEmptyEntries);
+
+                    // extract agregadorId from first line
+                    var parts0 = lines[0].Split('|', StringSplitOptions.TrimEntries);
+                    var aggId = parts0.Length >= 3 ? parts0[2] : "DESCONHECIDO";
+                    var mutex = ObterMutexParaAgregador(aggId);
+                    mutex.WaitOne();
+
+                    var samples = new List<Preprocess.ProcessedSample>();
+                    try
                     {
-                        string[] partes = linha.Split("|", StringSplitOptions.TrimEntries);
-
-                        if (partes.Length >= 5)
+                        foreach (var line in lines)
                         {
-                            // parted[0]=DADOS parted[1]=Origem parted[2]=Destino parted[3]=tipoDado parted[4]=valor
-                            string tipoMensagem = partes[0];
-                            string origem = partes[1];
-                            string destino = partes[2];
-                            string tipoDado = partes[3];
-                            double valor = double.Parse(partes[4]);
+                            var p = line.Split('|', StringSplitOptions.TrimEntries);
+                            if (p.Length < 6) continue;
 
-                            // Podem existir volume, metodo, e timestamp no final
-                            int volume = 0;
-                            string metodo = "";
-                            string timestampStr = DateTime.UtcNow.ToString("o");
+                            var tipoMsg = p[0];
+                            var wavyId = p[1];
+                            var agregIdMsg = p[2];
+                            var tipoDado = p[3];
+                            var valor = double.Parse(p[4]);
+                            int? volume = int.TryParse(p[5], out var v) ? v : (int?)null;
+                            var metodo = p.Length >= 7 ? p[6] : "";
+                            string ts;
+                            if (p.Length >= 8) ts = p[7];
+                            else ts = DateTime.UtcNow.ToString("o");
 
-                            if (partes.Length >= 6)
+                            var reg = new Registo
                             {
-                                // parted[5] pode ser volume ou timestamp
-                                bool isInt = int.TryParse(partes[5], out volume);
-                                if (!isInt)
-                                {
-                                    // Então parted[5] é timestamp
-                                    volume = 0;
-                                    timestampStr = partes[5];
-                                }
+                                TipoMensagem = tipoMsg,
+                                AgregadorId = agregIdMsg,
+                                WavyId = wavyId,
+                                TipoDado = tipoDado,
+                                Valor = valor,
+                                Volume = volume,
+                                Metodo = metodo,
+                                Timestamp = DateTime.Parse(ts),
+                                Origem = wavyId,
+                                Destino = agregIdMsg,
+                                Media = null,
+                                DesvioPadrao = null
+                            };
 
-                                if (partes.Length >= 7)
-                                {
-                                    // parted[6] pode ser "media", "bruto" ou outro
-                                    if (partes[6] == "media" || partes[6] == "bruto")
-                                    {
-                                        metodo = partes[6];
-                                        // parted[7] (se existir) é timestamp
-                                        if (partes.Length >= 8)
-                                        {
-                                            timestampStr = partes[7];
-                                        }
-                                    }
-                                    else
-                                    {
-                                        // parted[6] é timestamp
-                                        timestampStr = partes[6];
-                                    }
-                                }
+                            // EF Core save
+                            using (var db = new MonitoracaoContext())
+                            {
+                                db.Registos.Add(reg);
+                                db.SaveChanges();
                             }
 
-                            // Decide se a origem é AGREGADOR_XX ou WAVY_XX
-                            string wavyId = "";
-                            string agregadorId = "";
-                            if (origem.StartsWith("AGREGADOR_"))
-                                agregadorId = origem;
-                            else if (origem.StartsWith("WAVY_"))
-                                wavyId = origem;
+                            // Excel save
+                            GuardarNoExcel(reg);
 
-                            // Guarda no SQL e no Excel
-                            GuardarNoSQLServer(tipoMensagem, agregadorId, wavyId, tipoDado, valor, volume, metodo, timestampStr, origem, destino);
-                            GuardarNoExcel(tipoMensagem, agregadorId, wavyId, tipoDado, valor, volume, metodo, timestampStr, origem, destino);
-                        }
-                        else
-                        {
-                            Console.WriteLine("[SERVIDOR] Mensagem DADOS sem campos suficientes: " + linha);
+                            // collect for analysis
+                            samples.Add(new Preprocess.ProcessedSample
+                            {
+                                Origem = wavyId,
+                                Tipo = tipoDado,
+                                Valor = valor,
+                                Timestamp = ts
+                            });
                         }
                     }
-                }
-                finally
-                {
-                    // Liberta o Mutex mesmo que haja erro
-                    mutex.ReleaseMutex();
-                }
-
-                resposta = "CONFIRMADO | SERVIDOR_01 | RECEBIDO";
-            }
-            else if (message.StartsWith("COMANDO"))
-            {
-                // Se quisermos comandos tipo "desligar_servidor" via TCP
-                string[] partes = message.Split('|', StringSplitOptions.TrimEntries);
-                if (partes.Length >= 4)
-                {
-                    string acao = partes[3];
-                    if (acao == "desligar_servidor")
+                    finally
                     {
-                        // Fecha o servidor
-                        resposta = "CONFIRMADO | SERVIDOR_01 | DESLIGAR_SERVER_OK";
-                        // Responde antes de encerrar
-                        stream.Write(Encoding.UTF8.GetBytes(resposta));
+                        mutex.ReleaseMutex();
+                    }
 
+                    // call analysis RPC
+                    try
+                    {
+                        var sensorTipo = samples.FirstOrDefault()?.Tipo ?? "Desconhecido";
+                        var req = new AnalyzeRequest();
+                        req.Samples.AddRange(samples);
+                        var result = _analysisClient.Analyze(req);
+                        Console.WriteLine($"[ANALYSIS] Média={result.Media:F2}, Desvio={result.Desviopadrao:F2}");
+
+                        // persist analysis result
+                        var anal = new Registo
+                        {
+                            TipoMensagem = "ANALISE",
+                            AgregadorId = aggId,
+                            WavyId = null,
+                            TipoDado = sensorTipo,
+                            Valor = null,
+                            Volume = samples.Count,
+                            Metodo = "rpc",
+                            Timestamp = DateTime.UtcNow,
+                            Origem = "ANALYSIS_SERVICE",
+                            Destino = aggId,
+                            Media = result.Media,
+                            DesvioPadrao = result.Desviopadrao
+                        };
+                        using (var db = new MonitoracaoContext())
+                        {
+                            db.Registos.Add(anal);
+                            db.SaveChanges();
+                        }
+                        GuardarNoExcel(anal);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"[ANALYSIS] Falha RPC Analyze ou ao gravar BD: {ex.Message}");
+                        if (ex.InnerException != null)
+                            Console.WriteLine($"[ANALYSIS]   InnerException: {ex.InnerException.Message}");
+                    }
+
+                    response = "CONFIRMADO | SERVIDOR_01 | RECEBIDO";
+                }
+                else if (message.StartsWith("COMANDO"))
+                {
+                    var p = message.Split('|', StringSplitOptions.TrimEntries);
+                    if (p.Length >= 4 && p[3] == "desligar_servidor")
+                    {
+                        response = "CONFIRMADO | SERVIDOR_01 | DESLIGAR_SERVER_OK";
+                        stream.Write(Encoding.UTF8.GetBytes(response));
                         LimparFicheirosDeRegisto();
                         ApagarConteudoAgregadorData();
                         Environment.Exit(0);
                     }
                     else
                     {
-                        resposta = $"ERRO | SERVIDOR_01 | COMANDO DESCONHECIDO: {acao}";
+                        response = $"ERRO | SERVIDOR_01 | COMANDO_DESCONHECIDO";
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                resposta = "ERRO | SERVIDOR_01 | MENSAGEM DESCONHECIDA";
-            }
-        }
-        catch (Exception ex)
-        {
-            // Se der erro, responde com
-            resposta = $"ERRO | SERVIDOR_01 | {ex.Message}";
-        }
-
-        // Por fim, envia a resposta ao client
-        stream.Write(Encoding.UTF8.GetBytes(resposta));
-        client.Close();
-    }
-
-    /// Limpa o conteúdo de ficheiros que guardam a config de agregadores, WAVYs e estados,
-    /// geralmente usado ao encerrar o servidor.
-    static void LimparFicheirosDeRegisto()
-    {
-        string[] ficheiros = {
-            @"C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\agregadores_config.txt",
-            @"C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\wavys_config.txt",
-            @"C:\\Users\\rodri\\source\\repos\\SistemasDistribuidos2425.2\\MonitorizacaoOceanica\\estado_wavys.txt",
-        };
-
-        foreach (string ficheiro in ficheiros)
-        {
-            if (File.Exists(ficheiro))
-            {
-                File.WriteAllText(ficheiro, "");
-                Console.WriteLine($"[SERVIDOR] Ficheiro apagado: {ficheiro}");
-            }
-        }
-    }
-
-    /// Apaga todo o conteúdo da pasta 'agregador_data', onde cada Agregador
-    /// mantém ficheiros por tipo (Temperatura.txt, etc.).
-    static void ApagarConteudoAgregadorData()
-    {
-        string pasta = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\agregador_data\";
-
-        if (!Directory.Exists(pasta))
-        {
-            Console.WriteLine("[SERVIDOR] Pasta de dados de agregadores não existe.");
-            return;
-        }
-
-        try
-        {
-            string[] ficheiros = Directory.GetFiles(pasta);
-            foreach (string ficheiro in ficheiros)
-            {
-                File.Delete(ficheiro);
-                Console.WriteLine($"[SERVIDOR] Ficheiro apagado: {ficheiro}");
+                Console.WriteLine($"[ANALYSIS] Falha RPC Analyze: {ex.Message}");
+                if (ex.InnerException != null)
+                    Console.WriteLine($"[ANALYSIS]   Inner: {ex.InnerException.Message}");
             }
 
-            Console.WriteLine("[SERVIDOR] Todos os ficheiros da pasta agregador_data foram apagados.");
+            stream.Write(Encoding.UTF8.GetBytes(response));
+            client.Close();
         }
-        catch (Exception ex)
+
+        static void LimparFicheirosDeRegisto()
         {
-            Console.WriteLine($"[SERVIDOR] Erro ao apagar ficheiros: {ex.Message}");
+            foreach (var f in new[]
+            {
+                @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\agregadores_config.txt",
+                @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\wavys_config.txt",
+                @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\estado_wavys.txt"
+            })
+            {
+                if (File.Exists(f))
+                {
+                    File.WriteAllText(f, "");
+                    Console.WriteLine($"[SERVIDOR] Ficheiro apagado: {f}");
+                }
+            }
+        }
+
+        static void ApagarConteudoAgregadorData()
+        {
+            var pasta = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\agregador_data\";
+            if (!Directory.Exists(pasta)) return;
+            foreach (var f in Directory.GetFiles(pasta))
+            {
+                File.Delete(f);
+                Console.WriteLine($"[SERVIDOR] Apagado: {f}");
+            }
         }
     }
 }

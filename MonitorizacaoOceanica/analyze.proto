@@ -1,0 +1,18 @@
+syntax = "proto3";
+package analyze;
+
+import "preprocess.proto";
+
+message AnalyzeRequest {
+  repeated preprocess.ProcessedSample samples = 1;
+}
+
+message AnalysisResult {
+  double media         = 1;
+  double desviopadrao  = 2;
+  map<string,double> outliers = 3;
+}
+
+service AnalysisService {
+  rpc Analyze (AnalyzeRequest) returns (AnalysisResult);
+}

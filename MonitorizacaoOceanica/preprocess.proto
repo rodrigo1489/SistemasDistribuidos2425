@@ -1,0 +1,25 @@
+// preprocess.proto
+syntax = "proto3";
+package preprocess;
+
+message RawData {
+  string origem = 1;         // ex: WAVY_01 ou AGREGADOR_01
+  string tipo = 2;           // ex: "Temperatura"
+  repeated bytes payload = 3; // linhas brutas em texto/CSV/XML/JSON
+  string timestamp = 4;
+}
+
+message ProcessedSample {
+  string origem = 1;
+  string tipo = 2;
+  double valor = 3;
+  string timestamp = 4;
+}
+
+message PreprocessResponse {
+  repeated ProcessedSample samples = 1;
+}
+
+service PreprocessingService {
+  rpc Preprocess (RawData) returns (PreprocessResponse);
+}
