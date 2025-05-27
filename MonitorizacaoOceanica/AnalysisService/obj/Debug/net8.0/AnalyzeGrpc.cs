@@ -68,6 +68,12 @@ namespace Analyze {
     [grpc::BindServiceMethod(typeof(AnalysisService), "BindService")]
     public abstract partial class AnalysisServiceBase
     {
+      /// <summary>
+      /// Recebe um lote de samples e devolve estatísticas
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Analyze.AnalysisResult> Analyze(global::Analyze.AnalyzeRequest request, grpc::ServerCallContext context)
       {

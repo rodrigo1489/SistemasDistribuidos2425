@@ -15,30 +15,10 @@ class GestorPrincipal
         Console.WriteLine("=== PROGRAMA PRINCIPAL (Gestor) ===");
 
         // 1) Inicia o Servidor (arranca o .exe do Servidor)
-        Console.WriteLine("[GESTOR] A iniciar Servidor e Interface WEB...");
+        Console.WriteLine("[GESTOR] A iniciar Servidor");
         Process.Start(new ProcessStartInfo
         {
             FileName = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Servidor 2.0\bin\Debug\net8.0\Servidor 2.0.exe",
-            UseShellExecute = true
-        });
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\Servidor20.UI\bin\Debug\net9.0\Servidor20.UI.exe",
-            UseShellExecute = true
-        });
-        // 1.2) Inicia o PreprocessingService
-        Console.WriteLine("[GESTOR] A iniciar PreprocessingService...");
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\PreprocessingService\bin\Debug\net8.0\PreprocessingService.exe",
-            UseShellExecute = true
-        });
-
-        // 1.3) Inicia o AnalysisService
-        Console.WriteLine("[GESTOR] A iniciar AnalysisService...");
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = @"C:\Users\rodri\source\repos\SistemasDistribuidos2425.2\MonitorizacaoOceanica\AnalysisService\bin\Debug\net8.0\AnalysisService.exe",
             UseShellExecute = true
         });
 

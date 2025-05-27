@@ -92,6 +92,9 @@ namespace Analyze {
     private static readonly pb::FieldCodec<global::Preprocess.ProcessedSample> _repeated_samples_codec
         = pb::FieldCodec.ForMessage(10, global::Preprocess.ProcessedSample.Parser);
     private readonly pbc::RepeatedField<global::Preprocess.ProcessedSample> samples_ = new pbc::RepeatedField<global::Preprocess.ProcessedSample>();
+    /// <summary>
+    /// Todas as amostras a analisar
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<global::Preprocess.ProcessedSample> Samples {
@@ -270,6 +273,9 @@ namespace Analyze {
     /// <summary>Field number for the "media" field.</summary>
     public const int MediaFieldNumber = 1;
     private double media_;
+    /// <summary>
+    /// Média dos valores
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public double Media {
@@ -282,6 +288,9 @@ namespace Analyze {
     /// <summary>Field number for the "desviopadrao" field.</summary>
     public const int DesviopadraoFieldNumber = 2;
     private double desviopadrao_;
+    /// <summary>
+    /// Desvio-padrão dos valores
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public double Desviopadrao {
@@ -296,6 +305,9 @@ namespace Analyze {
     private static readonly pbc::MapField<string, double>.Codec _map_outliers_codec
         = new pbc::MapField<string, double>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForDouble(17, 0D), 26);
     private readonly pbc::MapField<string, double> outliers_ = new pbc::MapField<string, double>();
+    /// <summary>
+    /// Map de outliers identificados: chave = "Origem:Timestamp", valor = amostra
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::MapField<string, double> Outliers {

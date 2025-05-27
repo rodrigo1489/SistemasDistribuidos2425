@@ -4,15 +4,20 @@ package analyze;
 import "preprocess.proto";
 
 message AnalyzeRequest {
+  // Todas as amostras a analisar
   repeated preprocess.ProcessedSample samples = 1;
 }
 
 message AnalysisResult {
-  double media         = 1;
-  double desviopadrao  = 2;
+  // Média dos valores
+  double media = 1;
+  // Desvio-padrão dos valores
+  double desviopadrao = 2;
+  // Map de outliers identificados: chave = "Origem:Timestamp", valor = amostra
   map<string,double> outliers = 3;
 }
 
 service AnalysisService {
+  // Recebe um lote de samples e devolve estatísticas
   rpc Analyze (AnalyzeRequest) returns (AnalysisResult);
 }

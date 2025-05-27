@@ -215,37 +215,49 @@ namespace Servidor20
                         mutex.ReleaseMutex();
                     }
 
-                    // call analysis RPC
+                    // 4) RPC de análise por sensor
                     try
                     {
-                        var sensorTipo = samples.FirstOrDefault()?.Tipo ?? "Desconhecido";
-                        var req = new AnalyzeRequest();
-                        req.Samples.AddRange(samples);
-                        var result = _analysisClient.Analyze(req);
-                        Console.WriteLine($"[ANALYSIS] Média={result.Media:F2}, Desvio={result.Desviopadrao:F2}");
+                        // Agrupa as amostras por sensor
+                        var gruposPorSensor = samples.GroupBy(s => s.Tipo);
+                        foreach (var grupo in gruposPorSensor)
+                        {
+                            string sensorTipo = grupo.Key;
+                            var lista = grupo.ToList();
 
-                        // persist analysis result
-                        var anal = new Registo
-                        {
-                            TipoMensagem = "ANALISE",
-                            AgregadorId = aggId,
-                            WavyId = null,
-                            TipoDado = sensorTipo,
-                            Valor = null,
-                            Volume = samples.Count,
-                            Metodo = "rpc",
-                            Timestamp = DateTime.UtcNow,
-                            Origem = "ANALYSIS_SERVICE",
-                            Destino = aggId,
-                            Media = result.Media,
-                            DesvioPadrao = result.Desviopadrao
-                        };
-                        using (var db = new MonitoracaoContext())
-                        {
-                            db.Registos.Add(anal);
-                            db.SaveChanges();
+                            // Monta o request só com as amostras daquele sensor
+                            var req = new AnalyzeRequest();
+                            req.Samples.AddRange(lista);
+
+                            // Chama o serviço
+                            var result = _analysisClient.Analyze(req);
+                            Console.WriteLine($"[ANALYSIS] Sensor={sensorTipo}  Média={result.Media:F2}, Desvio={result.Desviopadrao:F2}");
+
+                            // Persiste no banco um registo de análise por sensor
+                            var anal = new Registo
+                            {
+                                TipoMensagem = "ANALISE",
+                                AgregadorId = aggId,
+                                WavyId = null,
+                                TipoDado = sensorTipo,
+                                Valor = null,
+                                Volume = lista.Count,
+                                Metodo = "rpc",
+                                Timestamp = DateTime.UtcNow,
+                                Origem = "ANALYSIS_SERVICE",
+                                Destino = aggId,
+                                Media = result.Media,
+                                DesvioPadrao = result.Desviopadrao
+                            };
+                            using (var db = new MonitoracaoContext())
+                            {
+                                db.Registos.Add(anal);
+                                db.SaveChanges();
+                            }
+
+                            // Guarda também no Excel
+                            GuardarNoExcel(anal);
                         }
-                        GuardarNoExcel(anal);
                     }
                     catch (Exception ex)
                     {
@@ -253,6 +265,7 @@ namespace Servidor20
                         if (ex.InnerException != null)
                             Console.WriteLine($"[ANALYSIS]   InnerException: {ex.InnerException.Message}");
                     }
+
 
                     response = "CONFIRMADO | SERVIDOR_01 | RECEBIDO";
                 }
