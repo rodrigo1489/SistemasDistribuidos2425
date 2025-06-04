@@ -340,8 +340,6 @@ Agregadores e WAVYs. |
 
 ## Contato / Créditos
 
-- **Autor:** Seu Nome  
-- **Email:** seu.email@exemplo.com  
-- **GitHub:** https://github.com/SEU_USUARIO/MonitorizacaoOceanica  
+- **Autor:** Rodrigo Fernandes, Alexandre Ferreira, Manuel Almeida
 
 Este projeto foi desenvolvido para fins académicos/profissionais em Sistemas Distribuídos. Reporte issues ou sugerir melhorias no repositório.
